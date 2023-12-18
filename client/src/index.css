@@ -36,8 +36,11 @@ font-family: 'Poppins', sans-serif; */
 }
 
 /* #####################
-Footer
+FOOTER CSS
 ##################### */
+.footer .text-center {
+  padding-bottom: 8px;
+}
 .footer a {
   padding: 10px;
   text-decoration: none;
@@ -46,6 +49,10 @@ Footer
 .footer a:hover {
   color: rgb(163, 161, 161);
 }
+
+/* #####################
+PAGE NOT FOUND CSS
+##################### */
 
 .pnf {
   display: flex;
@@ -64,7 +71,7 @@ Footer
   font-weight: normal;
 }
 
-.pnf-emoji{
+.pnf-emoji {
   font-size: 70px;
   margin-bottom: 0;
 }
@@ -75,4 +82,36 @@ Footer
   text-decoration: none;
   padding: 10px;
   margin-top: 10px;
+}
+
+/* #####################
+CONTACT CSS
+##################### */
+.contact-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.contact-image {
+  max-width: 50%; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 20px;
+}
+
+.contact-details {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: left;
+  background-color: #f8f9fa; /* Light gray background color, adjust as needed */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth effect, adjust as needed */
+}
+
+.contact-details h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
