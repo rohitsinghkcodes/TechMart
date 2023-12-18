@@ -29,7 +29,6 @@ export const isAdmin = async (req, res, next) => {
         console.log('Access Authorised');
       next();
     }
-    console.log(user.role);
 
   } catch (err) {
     console.log(err);

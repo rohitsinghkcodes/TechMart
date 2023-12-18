@@ -55,8 +55,6 @@ export const registerController = async (req, res) => {
   }
 };
 
-
-
 //* LOGIN USER CONTROLLER || POST
 export const loginController = async (req, res) => {
   try {
@@ -114,11 +112,10 @@ export const loginController = async (req, res) => {
   }
 };
 
-
 //test controller
-export const testController = (req,res)=>{
+export const testController = (req, res) => {
   res.send({
     success: true,
-    msg: 'Protected route'
-  })
-}
+    msg: "Protected Route",
+  });
+};
