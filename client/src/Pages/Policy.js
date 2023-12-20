@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Policy = () => {
   return (
-    <Layout>
+    <Layout title="Privacy Policy | E-Commerce App">
       <div className="container text-center">
         <div className="contact-container">
           {/* <img src={contactImage} alt="Contact" className="contact-image" /> */}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const PagenotFound = () => {
   return (
-    <Layout>
+    <Layout title="Page Not Found | E-Commerce App">
       <div className="pnf">
         <h1 className="pnf-emoji">☠️</h1>
         <h1 className="pnf-title">404</h1>

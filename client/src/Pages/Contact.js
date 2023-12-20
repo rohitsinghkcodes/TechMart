@@ -4,7 +4,7 @@ import contactImage from "../images/contact.png";
 
 const Contact = () => {
   return (
-    <Layout>
+    <Layout title="Contact | E-Commerce App">
       <div className="container text-center">
         <div className="contact-container">
           <img src={contactImage} alt="Contact" className="contact-image" />
