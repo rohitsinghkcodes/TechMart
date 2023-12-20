@@ -85,7 +85,7 @@ PAGE NOT FOUND CSS
 }
 
 /* #####################
-CONTACT CSS
+CONTACT PAGE CSS
 ##################### */
 .contact-container {
   display: flex;
@@ -114,4 +114,15 @@ CONTACT CSS
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 20px;
+}
+
+/* #####################
+REGISTER PAGE CSS
+##################### */
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  flex-direction: column;
 }

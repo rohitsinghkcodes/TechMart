@@ -2,7 +2,6 @@ import { useState, React } from "react";
 import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
 
 const Register = () => {
   // hooks
@@ -16,20 +15,23 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:8080/api/v1/auth/register/',
+        "http://localhost:8080/api/v1/auth/register/",
         { name, email, password, phone }
       );
 
       if (res.data.success) {
-        toast.success(res.data.msg);
+        // toast.success(res.data.msg);
+        alert(`Sucess: ${res.data.msg}`);
 
         navigate("/login");
       } else {
-        toast.error(res.data.msg);
+        // toast.error(res.data.msg);
+        alert(`Error: ${res.data.msg}`);
       }
     } catch (err) {
       console.log(err);
-      toast.error("Something went wrong!");
+      // toast.error("Something went wrong!");
+      alert(`Something went wrong\nError: ${err}`);
     }
   };
 

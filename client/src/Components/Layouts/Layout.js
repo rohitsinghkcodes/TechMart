@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
 import { Helmet } from "react-helmet";
+import { Toaster } from 'react-hot-toast';
 
 const Layout = (props) => {
   return (
@@ -15,7 +16,10 @@ const Layout = (props) => {
       </Helmet>
       <Header />
 
-      <main style={{ minHeight: "78vh" }}>{props.children}</main>
+      <main style={{ minHeight: "78vh" }}>
+        {props.children}
+        <Toaster />
+        </main>
 
       <Footer />
     </div>
