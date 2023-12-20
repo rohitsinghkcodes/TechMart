@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 const Policy = () => {
   return (
     <Layout title="Privacy Policy | E-Commerce App">
-      <div className="container text-center">
-        <div className="about-policy-container">
+      <div className="container text-center mb-5">
+        <div className="contact-container py-2 ">
           {/* <img src={contactImage} alt="Contact" className="contact-image" /> */}
-          <div className="about-policy-details">
+          <div className="contact-details">
             <h2>Privacy Policy</h2>
             <p>
               Welcome to E-Commerce App. This page informs you of our policies regarding the collection, use, and disclosure of Personal Information we receive from users of the site.
