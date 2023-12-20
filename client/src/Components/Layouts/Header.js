@@ -43,12 +43,12 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink to="/register" className="nav-link" href="#">
-                  Signup
+                  SignUp
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/login" className="nav-link" href="#">
-                  Login
+                  SignIn
                 </NavLink>
               </li>
               <li className="nav-item">

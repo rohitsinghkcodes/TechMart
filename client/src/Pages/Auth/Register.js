@@ -42,7 +42,7 @@ const Register = () => {
         
 
         <form onSubmit={onSubmitHandler}>
-        <h1 className="mb-5 text-center">Sign Up</h1>
+        <h1 className="mb-5 text-center">Sign up</h1>
           <div className="mb-2">
             <label htmlFor="exampleInputName" className="form-label">
               Name
