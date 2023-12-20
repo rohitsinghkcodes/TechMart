@@ -21,7 +21,7 @@ font-family: 'Poppins', sans-serif; */
 NAVBAR CSS
 ##################### */
 .navbar {
-  margin-top: 1vh;
+  margin-top: vh;
   font-family: "Poppins", sans-serif;
   font-size: 17px;
   line-height: 26px;
@@ -118,13 +118,42 @@ CONTACT PAGE CSS
   font-size: 20px;
   font-family: "Poppins", sans-serif;
   text-align: left;
-  background-color: #f8f9fa; /* Light gray background color, adjust as needed */
+  background-color: #232323; /* Light gray background color, adjust as needed */
   padding: 20px;
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth effect, adjust as needed */
 }
 
 .contact-details h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* #####################
+ABOUT-PRIVACY_POLICY PAGE CSS
+##################### */
+.about-policy-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.about-policy-image {
+  max-width: 50%; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 20px;
+}
+
+.about-policy-details {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: left; /* Light gray background color, adjust as needed */
+  padding: 20px;/* Box shadow for depth effect, adjust as needed */
+}
+
+.about-policy-details h2 {
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 20px;

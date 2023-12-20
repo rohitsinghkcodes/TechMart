@@ -5,8 +5,8 @@ const About = () => {
   return (
     <Layout title="About E-Commerce App">
       <div className="container text-center">
-        <div className="contact-container">
-          <div className="contact-details">
+        <div className="about-policy-container">
+          <div className="about-policy-details">
             <h2>About Our E-Commerce App</h2>
             <p>
               Welcome to E-Commerce App, your go-to destination for all your online shopping needs. At [Your Ecommerce App Name], we are committed to providing you with a seamless and enjoyable shopping experience.

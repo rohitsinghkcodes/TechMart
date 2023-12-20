@@ -6,9 +6,9 @@ const Policy = () => {
   return (
     <Layout title="Privacy Policy | E-Commerce App">
       <div className="container text-center">
-        <div className="contact-container">
+        <div className="about-policy-container">
           {/* <img src={contactImage} alt="Contact" className="contact-image" /> */}
-          <div className="contact-details">
+          <div className="about-policy-details">
             <h2>Privacy Policy</h2>
             <p>
               Welcome to E-Commerce App. This page informs you of our policies regarding the collection, use, and disclosure of Personal Information we receive from users of the site.
