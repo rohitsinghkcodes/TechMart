@@ -2,6 +2,7 @@ import { useState, React } from "react";
 import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/authStyles.css"; 
 
 const Register = () => {
   // hooks
@@ -37,65 +38,66 @@ const Register = () => {
 
   return (
     <Layout title="Register | E-Commerce App">
-      <div className="register">
-        <h1 className="mb-5">Register Page</h1>
+      <div className="form-container">
+        
 
         <form onSubmit={onSubmitHandler}>
+        <h1 className="mb-5 text-center">Sign Up</h1>
           <div className="mb-2">
-            {/* <label htmlFor="exampleInputName" className="form-label">
+            <label htmlFor="exampleInputName" className="form-label">
               Name
-            </label> */}
+            </label>
             <input
               required
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="form-control"
+              className="bg-dark form-control input-field"
               id="exampleInputName"
               placeholder="Enter your name"
             />
           </div>
 
           <div className="mb-2">
-            {/* <label htmlFor="exampleInputEmail" className="form-label">
+            <label htmlFor="exampleInputEmail" className="form-label">
               Email
-            </label> */}
+            </label>
             <input
               required
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
+              className="bg-dark form-control input-field"
               id="exampleInputEmail"
               placeholder="Enter your email"
             />
           </div>
 
           <div className="mb-2">
-            {/* <label htmlFor="exampleInputPassword" className="form-label">
+            <label htmlFor="exampleInputPassword" className="form-label">
               Password
-            </label> */}
+            </label>
             <input
               required
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="form-control"
+              className="bg-dark form-control input-field"
               id="exampleInputPassword"
               placeholder="Enter your password"
             />
           </div>
 
           <div className="mb-3">
-            {/* <label htmlFor="exampleInputPhone" className="form-label">
+            <label htmlFor="exampleInputPhone" className="form-label">
               Phone
-            </label> */}
+            </label>
             <input
               required
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="form-control"
+              className="bg-dark form-control input-field"
               id="exampleInputPhone"
               placeholder="Enter your phone no"
             />

@@ -43,7 +43,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink to="/register" className="nav-link" href="#">
-                  Register
+                  Signup
                 </NavLink>
               </li>
               <li className="nav-item">

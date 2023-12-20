@@ -1,0 +1,57 @@
+.bg-dark {
+  background-color: #202020 !important;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 5vh;
+}
+
+.form-container form {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 60px;
+  background-color: #2a2a2a;
+  border-radius: 20px;
+}
+
+.form-label {
+  margin-bottom: 3px !important;
+}
+
+.input-field {
+  border: 0;
+  color: #c5c5c5 !important;
+  border: none;
+  border-radius: 5px;
+  background-color: #202020;
+  margin-bottom: 15px;
+}
+
+.input-field::placeholder {
+  color: #999 !important; /* Set the desired color */
+}
+
+
+.form-container form button {
+  margin-top: 4px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bf0543;
+  color: white;
+  /* have to make width dynamic */
+  min-width: 380px;
+}
+
+.form-container form button:hover {
+  background: #bf0543;
+  background: -webkit-linear-gradient(to right, #d91456, #cd0749);
+  background: linear-gradient(to right, #d91456, #cd0749);
+}
+
+.form-label {
+  color: white;
+}

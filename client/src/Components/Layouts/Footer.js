@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="bg-dark text-light p-3 footer">
+    <div className=" text-light p-3 footer">
       <h4 className="text-center">
         All rights reserved &copy; ROHIT KUMAR SINGH
       </h4>

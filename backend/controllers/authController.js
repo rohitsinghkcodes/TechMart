@@ -73,7 +73,7 @@ export const loginController = async (req, res) => {
     if (!user) {
       return res.status(404).send({
         success: false,
-        msg: "Email is not registeed, please register!",
+        msg: "Email is not registered, please register!",
       });
     }
 
@@ -82,7 +82,7 @@ export const loginController = async (req, res) => {
     const matchPass = await comparePasswords(password, user.password);
     //if password does not match => if matches aage badho 👍
     if (!matchPass) {
-      return res.status(200).send({
+      return res.status(400).send({
         success: false,
         msg: "Invalid password",
       });
@@ -112,7 +112,10 @@ export const loginController = async (req, res) => {
   }
 };
 
-//test controller
+
+
+
+//*test controller
 export const testController = (req, res) => {
   res.send({
     success: true,
