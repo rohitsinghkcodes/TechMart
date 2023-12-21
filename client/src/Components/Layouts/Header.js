@@ -1,8 +1,26 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useAuth } from "../../Context/authContext.js";
+
 
 
 const Header = () => {
+  const [auth, setAuth] = useAuth()
+
+  //clear storage and set auth details after logging out => handled by this funtion
+  const handleLogOut = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: ""
+    });
+
+    //clearing the local storage
+    localStorage.removeItem("auth")
+    alert('✅ Signed out successfully')
+
+  }
+
   return (
     <>
       <nav
@@ -23,10 +41,10 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <Link to="/" className="navbar-brand" >
-              🛒 ecommerce app
+              👜 E-COMMERCE APP
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink
                   to="/"
                   className="nav-link active"
@@ -35,25 +53,38 @@ const Header = () => {
                 >
                   Home
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink to="/categories" className="nav-link" href="#">
                   Categories
                 </NavLink>
               </li>
-              <li className="nav-item">
+
+              {
+                !auth.user ? (<>
+                <li className="nav-item">
                 <NavLink to="/register" className="nav-link" href="#">
-                  SignUp
+                  Sign up
                 </NavLink>
               </li>
+
               <li className="nav-item">
                 <NavLink to="/login" className="nav-link" href="#">
-                  SignIn
+                  Sign in
                 </NavLink>
               </li>
+                </>):(<>
+                  <li className="nav-item">
+                <NavLink onClick={handleLogOut} to="/login" className="nav-link" href="#">
+                  Sign out
+                </NavLink>
+              </li>
+                </>)
+              }
+
               <li className="nav-item">
                 <NavLink to="/cart" className="nav-link" href="#">
-                  Cart(0)
+                  🛒(0)
                 </NavLink>
               </li>
             </ul>

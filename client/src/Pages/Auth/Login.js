@@ -3,13 +3,16 @@ import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/authStyles.css";
+import { useAuth } from "../../Context/authContext.js"
 
 const Login = () => {
   // hooks
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth()
 
+  //SUBMIT BUTTOM HIT HANDLER
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -22,6 +25,16 @@ const Login = () => {
         // toast.success(res.data.msg);
         alert(`Sucess: ${res.data.msg}`);
 
+        //before navigating add user data to auth
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token
+        })
+        //store auth details in local_storage
+        localStorage.setItem("auth",JSON.stringify(res.data))
+
+        //navigate to homepage
         navigate("/");
       } else {
         // toast.error(res.data.msg);
