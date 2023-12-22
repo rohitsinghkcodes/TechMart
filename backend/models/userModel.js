@@ -1,4 +1,4 @@
-import {mongoose, Schema } from "mongoose";
+import { mongoose, Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,9 +17,13 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     phone: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
+    security_ans: {
+      type: String,
+      required: true,
+    },
     role: {
       type: Number,
       default: 0,

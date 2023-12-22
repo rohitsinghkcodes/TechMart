@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair:opsz,wght@5..1200,700&family=Poppins:wght@300;400&display=swap");
+
+/* font-family: 'Playfair', serif;
+font-family: 'Poppins', sans-serif; */
+
+
 * {
   margin: 0;
   padding: 0;
@@ -8,14 +13,14 @@
 /* #####################
 BODY CSS
 ##################### */
-/* body {
-  background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
+body {
+  background-color: cadetblue;
+  /* background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
   font-family: "Poppins", sans-serif;
-  color: wheat;
-} */
+  color: wheat; */
+}
 
-/* font-family: 'Playfair', serif;
-font-family: 'Poppins', sans-serif; */
+
 
 /* #####################
 NAVBAR CSS
@@ -128,4 +133,15 @@ CONTACT PAGE CSS
   text-transform: uppercase;
   margin-bottom: 20px;
 }
+
+.forgot-signin-signup a{
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+.forgot-signin-signup a:hover {
+  color: rgb(163, 161, 161);
+}
+
+
 
