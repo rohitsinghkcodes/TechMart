@@ -1,7 +1,7 @@
 import { useState, React } from "react";
 import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import "../../styles/authStyles.css";
 import { useAuth } from "../../Context/authContext.js"
 
@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth()
+  const location = useLocation();
 
   //SUBMIT BUTTOM HIT HANDLER
   const onSubmitHandler = async (e) => {
@@ -35,7 +36,7 @@ const Login = () => {
         localStorage.setItem("auth",JSON.stringify(res.data))
 
         //navigate to homepage
-        navigate("/");
+        navigate(location.state || "/");
       } else {
         // toast.error(res.data.msg);
         alert(`Error: ${res.data.msg}`);
