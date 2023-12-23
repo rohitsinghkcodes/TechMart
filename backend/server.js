@@ -6,6 +6,8 @@ import connectDB from "./config/db_connection.js";
 import authRoutes from "./routes/authRoute.js";
 import cors from "cors";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import formidable from 'express-formidable';
 
 //configure env
 dotenv.config();
@@ -24,6 +26,7 @@ app.use(cors());
 //routes-> now we can use these routes from anywhere
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
+app.use("/api/v1/products", productRoutes);
 
 // Create REST api
 app.get("/", (req, res) => {

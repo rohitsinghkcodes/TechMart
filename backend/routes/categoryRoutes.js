@@ -11,7 +11,7 @@ import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 //router object
 const router = express.Router();
 
-//^ ROUTES
+//^ ######## ROUTES ########
 //~ CREATE CATEGORY
 router.post(
   "/create-category",
