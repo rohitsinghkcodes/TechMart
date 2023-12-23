@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db_connection.js";
 import authRoutes from "./routes/authRoute.js";
-import cors from 'cors'
+import cors from "cors";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 //configure env
 dotenv.config();
@@ -15,14 +16,14 @@ connectDB();
 //Create REST onject -> calling express function into app
 const app = express();
 
-
 //middlewares
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-//routes
+//routes-> now we can use these routes from anywhere
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/category", categoryRoutes);
 
 // Create REST api
 app.get("/", (req, res) => {
