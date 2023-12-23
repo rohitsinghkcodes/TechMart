@@ -3,12 +3,15 @@ import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/authStyles.css";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [security_ans, setSecurityAns] = useState("");
+  const [showPassword, setShowPassword] = useState(false); 
 
   //SUBMIT BUTTOM HIT HANDLER
   const onSubmitHandler = async (e) => {
@@ -80,15 +83,36 @@ const ForgotPassword = () => {
             <label htmlFor="exampleInputPassword" className="form-label">
               New Password
             </label>
+            <div className="password-input-wrapper">
             <input
               required
-              type="password"
+              type={showPassword ? "text" : "password"} 
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="bg-dark form-control input-field"
               id="exampleInputPassword"
               placeholder="Enter your new password"
             />
+            <span
+                className="eye-icon"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <IoMdEyeOff
+                    size="20px"
+                    color="rgb(163, 161, 161)"
+                    style={{ justifyContent: "center", alignItems:"center"}}
+                  />
+                ) : (
+                  <IoMdEye
+                    size="20px"
+                    color="rgb(163, 161, 161)"
+                    style={{ justifyContent: "center",alignItems:"center"}}
+                  />
+                )}
+              </span>
+            </div>
+
           </div>
 
           <button type="submit" className="btn btn-primary">
