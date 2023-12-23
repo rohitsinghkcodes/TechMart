@@ -3,6 +3,8 @@ import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/authStyles.css";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+
 
 const Register = () => {
   // hooks
@@ -11,6 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [security_ans, setSecurityAns] = useState("");
   const [phone, setPhone] = useState("");
+  const [showPassword, setShowPassword] = useState(false); 
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
@@ -74,15 +77,37 @@ const Register = () => {
             <label htmlFor="exampleInputPassword" className="form-label">
               Password
             </label>
-            <input
-              required
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="bg-dark form-control input-field"
-              id="exampleInputPassword"
-              placeholder="Enter your password"
-            />
+            <div className="password-input-wrapper">
+              <input
+                required
+                type={showPassword ? "text" : "password"} // Toggle password visibility
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-dark form-control input-field"
+                id="exampleInputPassword"
+                placeholder="Enter your password"
+              />
+              <span
+                className="eye-icon"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <IoMdEyeOff
+                    size="20px"
+                    color="rgb(163, 161, 161)"
+                    style={{ justifyContent: "center", alignItems:"center"}}
+                  />
+                ) : (
+                  <IoMdEye
+                    size="20px"
+                    color="rgb(163, 161, 161)"
+                    style={{ justifyContent: "center",alignItems:"center"}}
+                  />
+                )}
+              </span>
+            </div>
+
+
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPhone" className="form-label">

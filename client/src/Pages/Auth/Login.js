@@ -1,19 +1,21 @@
-import { useState, React } from "react";
+import { useState } from "react";
 import Layout from "../../Components/Layouts/Layout";
 import axios from "axios";
-import { useNavigate,useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../../styles/authStyles.css";
-import { useAuth } from "../../Context/authContext.js"
+import { useAuth } from "../../Context/authContext.js";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
   // hooks
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Added state for password visibility
   const navigate = useNavigate();
-  const [auth, setAuth] = useAuth()
+  const [auth, setAuth] = useAuth();
   const location = useLocation();
 
-  //SUBMIT BUTTOM HIT HANDLER
+  // SUBMIT BUTTON HIT HANDLER
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -23,27 +25,25 @@ const Login = () => {
       });
 
       if (res.data.success) {
-        // toast.success(res.data.msg);
         alert(`✅ ${res.data.msg}`);
 
-        //before navigating add user data to auth
+        // before navigating, add user data to auth
         setAuth({
           ...auth,
           user: res.data.user,
-          token: res.data.token
-        })
-        //store auth details in local_storage
-        localStorage.setItem("auth",JSON.stringify(res.data))
+          token: res.data.token,
+        });
 
-        //navigate to homepage
+        // store auth details in local_storage
+        localStorage.setItem("auth", JSON.stringify(res.data));
+
+        // navigate to homepage
         navigate(location.state || "/");
       } else {
-        // toast.error(res.data.msg);
         alert(`Error: ${res.data.msg}`);
       }
     } catch (err) {
       console.log(err);
-      // toast.error("Something went wrong!");
       alert(`Something went wrong, Please try again!`);
     }
   };
@@ -73,15 +73,35 @@ const Login = () => {
             <label htmlFor="exampleInputPassword" className="form-label">
               Password
             </label>
-            <input
-              required
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="bg-dark form-control input-field"
-              id="exampleInputPassword"
-              placeholder="Enter your password"
-            />
+            <div className="password-input-wrapper">
+              <input
+                required
+                type={showPassword ? "text" : "password"} // Toggle password visibility
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-dark form-control input-field"
+                id="exampleInputPassword"
+                placeholder="Enter your password"
+              />
+              <span
+                className="eye-icon"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <IoMdEyeOff
+                    size="20px"
+                    color="rgb(163, 161, 161)"
+                    style={{ justifyContent: "center", alignItems:"center"}}
+                  />
+                ) : (
+                  <IoMdEye
+                    size="20px"
+                    color="rgb(163, 161, 161)"
+                    style={{ justifyContent: "center",alignItems:"center"}}
+                  />
+                )}
+              </span>
+            </div>
           </div>
 
           <button type="submit" className="btn btn-primary">

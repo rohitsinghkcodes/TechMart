@@ -41,16 +41,6 @@ const Header = () => {
               👜 E-COMMERCE APP
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              {/* <li className="nav-item">
-                <NavLink
-                  to="/"
-                  className="nav-link active"
-                  aria-current="page"
-                  href="#"
-                >
-                  Home
-                </NavLink>
-              </li> */}
               <li className="nav-item">
                 <NavLink to="/categories" className="nav-link" href="#">
                   Categories
@@ -76,11 +66,18 @@ const Header = () => {
                       aria-expanded="false"
                     >
                       {/* Making fisrt letter of name capital */}
-                      {auth.user.name[0].toUpperCase() + auth.user.name.slice(1)}
+                      {auth.user.name[0].toUpperCase() +
+                        auth.user.name.slice(1)}
                     </NavLink>
+                    {/* Dropdown menu */}
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to="/dashboard" className="dropdown-item">
+                        <NavLink
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
+                          className="dropdown-item"
+                        >
                           Dashboard
                         </NavLink>
                         <NavLink

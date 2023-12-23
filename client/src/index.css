@@ -14,7 +14,7 @@ font-family: 'Poppins', sans-serif; */
 BODY CSS
 ##################### */
 body {
-  background-color: cadetblue;
+  background-color: rgb(65, 139, 49);
   /* background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
   font-family: "Poppins", sans-serif;
   color: wheat; */
@@ -141,6 +141,25 @@ CONTACT PAGE CSS
 }
 .forgot-signin-signup a:hover {
   color: rgb(163, 161, 161);
+}
+
+
+/* PASSWORD */
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-inner {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
 }
 
 
