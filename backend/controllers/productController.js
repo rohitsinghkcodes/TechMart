@@ -5,8 +5,7 @@ import productModel from "../models/productModel.js";
 //* CREATE NEW PRODUCT CONTROLLER
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity } =
-      req.fields;
+    const { name, description, price, category, quantity } = req.fields;
     const { image } = req.files;
 
     // Validation
@@ -28,13 +27,13 @@ export const createProductController = async (req, res) => {
     }
 
     const newProduct = new productModel({
-        ...req.fields,
-        slug: slugify(name),
-      });
+      ...req.fields,
+      slug: slugify(name),
+    });
 
     if (image) {
-        newProduct.image.data = fs.readFileSync(image.path);
-        newProduct.image.contentType = image.type;
+      newProduct.image.data = fs.readFileSync(image.path);
+      newProduct.image.contentType = image.type;
     }
 
     await newProduct.save();
@@ -49,5 +48,28 @@ export const createProductController = async (req, res) => {
     res
       .status(500)
       .send({ success: false, msg: "Error In Product Creation!", err });
+  }
+};
+
+//* GET ALL PRODUCTS CONTROLLER
+export const getProductsController = async (req, res) => {
+  try {
+    const products = await productModel
+      .find({})
+      .select("-image")
+      .limit(12)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      msg: "ALL PRODUCTS FETCHED SUCCESSFULLY!",
+      products,
+      products_count: products.length,
+    });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send({ success: false, msg: "Error While Fetching Products!", err });
   }
 };
