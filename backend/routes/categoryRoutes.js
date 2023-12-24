@@ -29,7 +29,7 @@ router.put(
 );
 
 //~ GET ALL CATEGORIES
-router.get("/get-all-category", categoryController);
+router.get("/get-categories", categoryController);
 
 //~ GET SINGLE CATEGORY
 router.get("/get-single-category/:slug", getSingleCategoryController);
