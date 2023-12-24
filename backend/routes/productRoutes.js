@@ -5,7 +5,7 @@ import {
   getSingleProductController,
   productImageController,
   deleteProductController,
-  updateProductController
+  updateProductController,
 } from "../controllers/productController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
@@ -22,7 +22,6 @@ router.post(
   formidable(),
   createProductController
 );
-
 
 //~ UPDATE PRODUCT
 router.put(
