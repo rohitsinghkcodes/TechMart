@@ -19,7 +19,7 @@ const CreateCategory = () => {
         name,
       });
       if (data.success) {
-        alert(`✅ ${name} is created`);
+        alert(`✅ ${data.msg}`);
         getAllCategories();
       } else {
         alert(`❌ ${data.msg}`);
@@ -56,7 +56,7 @@ const CreateCategory = () => {
         { name: updatedName }
       );
       if (data.success) {
-        alert(`✅ Updated`);
+        alert(`✅ ${data.msg}`);
         setSelected(null);
         setUpdatedName(null);
         setVisible(false);
