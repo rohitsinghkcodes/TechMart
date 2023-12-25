@@ -155,5 +155,3 @@ export const forgotPasswordController = async (req, res) => {
     });
   }
 };
-
-
