@@ -97,7 +97,7 @@ export const loginController = async (req, res) => {
     const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       msg: "USER SIGNED IN SUCCESSFULLY",
       user: {
@@ -131,9 +131,9 @@ export const forgotPasswordController = async (req, res) => {
     //finding user in db
     const user = await userModel.findOne({ email, security_ans });
     if (!user) {
-      res.status(404).send({
+      return res.status(400).send({
         success: false,
-        msg: "Wrong email or password!",
+        msg: "Wrong email or security ans!",
       });
     }
 
@@ -141,7 +141,7 @@ export const forgotPasswordController = async (req, res) => {
     const hashedPassword = await hashPassword(newPassword);
 
     //updating the pssword
-    await userModel.findByIdAndUpdate(user._id, { password: hashedPassword });
+    await userModel.findByIdAndUpdate(user?._id, { password: hashedPassword });
     res.status(200).send({
       success: true,
       msg: "Password reset Successfully.",

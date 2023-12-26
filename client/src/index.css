@@ -157,3 +157,11 @@ CONTACT PAGE CSS
   cursor: pointer;
   user-select: none;
 }
+
+
+/* PRODUCT link */
+.product-link{
+  text-decoration: none !important;
+  color: black !important;
+
+}

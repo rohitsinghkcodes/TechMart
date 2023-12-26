@@ -3,11 +3,12 @@ import Layout from "../../Components/Layouts/Layout";
 import AdminMenu from "../../Components/Layouts/AdminMenu";
 import axios from "axios";
 import { Select } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const { Option } = Select;
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -16,6 +17,32 @@ const CreateProduct = () => {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [image, setImage] = useState("");
+  const [id, setId] = useState("");
+
+  //*GET SINGLE PRODUCT
+  const getSingleProduct = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/v1/products/get-single-product/${params.slug}`
+      );
+      if (data?.success) {
+        setName(data?.product.name);
+        setId(data?.product._id);
+        setDescription(data?.product.description);
+        setPrice(data?.product.price);
+        setCategory(data?.product.category._id);
+        setQuantity(data?.product.quantity);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Something went wrong while getting single product!");
+    }
+  };
+
+  useEffect(() => {
+    getSingleProduct();
+    //eslint-disable-next-line
+  }, []);
 
   //* GET ALL CATEGORIES
   const getAllCategories = async () => {
@@ -34,8 +61,8 @@ const CreateProduct = () => {
     getAllCategories();
   }, []);
 
-  //*handle Create Product Button
-  const handleCreateProductBtn = async (e) => {
+  //*handle Update Product Button
+  const handleUpdateProductBtn = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
@@ -43,11 +70,11 @@ const CreateProduct = () => {
       productData.append("description", description);
       productData.append("price", price);
       productData.append("quantity", quantity);
-      productData.append("image", image);
+      image && productData.append("image", image);
       productData.append("category", category);
 
-      const { data } = await axios.post(
-        "/api/v1/products/create-product",
+      const { data } = await axios.put(
+        `/api/v1/products/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -58,7 +85,30 @@ const CreateProduct = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something Went Wrong In Creating New Product!");
+      alert("Something Went Wrong In Updating THe Product!");
+    }
+  };
+
+  //*handle Delete Product Button
+  const handleDeleteProductBtn = async (e) => {
+    e.preventDefault();
+    try {
+      const confirm = window.prompt(
+        "Are you sure, you want to delete this product?"
+      );
+      if (!confirm) return;
+      const { data } = await axios.delete(
+        `/api/v1/products/delete-product/${id}`
+      );
+      if (data?.success) {
+        alert(`✅ ${data?.msg}`);
+        navigate("/dashboard/admin/products");
+      } else {
+        alert(`❌ ${data?.msg}`);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Something Went Wrong In Deleting The Product!");
     }
   };
 
@@ -71,7 +121,7 @@ const CreateProduct = () => {
           </div>
           <div className="col-md-9">
             <div className="card w-75 p-3">
-              <h3>Products Page</h3>
+              <h3>Update Product Page</h3>
               <div className="m-1 w-75">
                 <Select
                   bordered={false}
@@ -82,6 +132,7 @@ const CreateProduct = () => {
                   onChange={(value) => {
                     setCategory(value);
                   }}
+                  value={category}
                 >
                   {categories?.map((c) => (
                     <Option key={c._id} value={c._id}>
@@ -92,7 +143,7 @@ const CreateProduct = () => {
 
                 <div className="mb-3">
                   <label className="btn btn-outline-secondary col-md-12">
-                    {image ? image.name : "Upload Image"}
+                    {image ? image.name : "Change Image"}
                     <input
                       type="file"
                       name="image"
@@ -103,10 +154,19 @@ const CreateProduct = () => {
                   </label>
                 </div>
                 <div className="mb-3">
-                  {image && (
+                  {image ? (
                     <div className="text-center">
                       <img
                         src={URL.createObjectURL(image)}
+                        alt="product"
+                        height="200px"
+                        className="img img-responsiv rounded"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <img
+                        src={`/api/v1/products/product-image/${id}`}
                         alt="product"
                         height="200px"
                         className="img img-responsiv rounded"
@@ -160,17 +220,24 @@ const CreateProduct = () => {
                     onchange={(value) => {
                       setShipping(value);
                     }}
+                    value={shipping ? "Yes" : "No"}
                   >
                     <Option value="1">Yes</Option>
                     <Option value="0">No</Option>
                   </Select>
                 </div>
-                <div className="mb-3">
+                <div className="mb-3 ">
                   <button
-                    className="btn btn-primary"
-                    onClick={handleCreateProductBtn}
+                    className="btn btn-primary mx-3"
+                    onClick={handleUpdateProductBtn}
                   >
-                    Create Product
+                    Update Product
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={handleDeleteProductBtn}
+                  >
+                    Delete Product
                   </button>
                 </div>
               </div>
@@ -182,4 +249,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default UpdateProduct;

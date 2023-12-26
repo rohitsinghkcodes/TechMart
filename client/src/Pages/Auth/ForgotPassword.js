@@ -5,13 +5,12 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/authStyles.css";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
-
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [security_ans, setSecurityAns] = useState("");
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
 
   //SUBMIT BUTTOM HIT HANDLER
   const onSubmitHandler = async (e) => {
@@ -28,6 +27,7 @@ const ForgotPassword = () => {
 
       if (res.data.success) {
         // toast.success(res.data.msg);
+        console.log(res.data.success);
         alert(`✅ ${res.data.msg} ✅`);
 
         //navigate to homepage
@@ -39,7 +39,7 @@ const ForgotPassword = () => {
     } catch (err) {
       console.log(err);
       // toast.error("Something went wrong!");
-      alert(`🚫 Something went wrong, Please try again! 🚫`);
+      alert(`🚫 Something went wrong, Please try again!`);
     }
   };
 
@@ -84,16 +84,16 @@ const ForgotPassword = () => {
               New Password
             </label>
             <div className="password-input-wrapper">
-            <input
-              required
-              type={showPassword ? "text" : "password"} 
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              className="bg-dark form-control input-field"
-              id="exampleInputPassword"
-              placeholder="Enter your new password"
-            />
-            <span
+              <input
+                required
+                type={showPassword ? "text" : "password"}
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="bg-dark form-control input-field"
+                id="exampleInputPassword"
+                placeholder="Enter your new password"
+              />
+              <span
                 className="eye-icon"
                 onClick={() => setShowPassword(!showPassword)}
               >
@@ -101,18 +101,17 @@ const ForgotPassword = () => {
                   <IoMdEyeOff
                     size="20px"
                     color="rgb(163, 161, 161)"
-                    style={{ justifyContent: "center", alignItems:"center"}}
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   />
                 ) : (
                   <IoMdEye
                     size="20px"
                     color="rgb(163, 161, 161)"
-                    style={{ justifyContent: "center",alignItems:"center"}}
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   />
                 )}
               </span>
             </div>
-
           </div>
 
           <button type="submit" className="btn btn-primary">
