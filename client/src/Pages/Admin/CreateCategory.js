@@ -30,7 +30,7 @@ const CreateCategory = () => {
     }
   };
 
-  //* GET ALL CATEGORIES 
+  //* GET ALL CATEGORIES
   const getAllCategories = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-categories");
@@ -88,15 +88,15 @@ const CreateCategory = () => {
 
   return (
     <Layout title={"Dashboard - Categories"}>
-      <div className="container-fluid m-3 p-3">
+      <div className="text-center container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="card w-75 p-3">
+            <div className="card m-4 p-3">
               <h3>Manage Categories</h3>
-              <div className="my-3">
+              <div className="my-3 ">
                 <CategoryForm
                   handleSubmit={handleSubmit}
                   value={name}
