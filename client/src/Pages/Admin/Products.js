@@ -22,19 +22,6 @@ const Products = () => {
     }
   };
 
-  //   //*GET PRODUCT IMAGE
-  //   const getProductImage = async (id) => {
-  //     try {
-  //       const { data } = await axios.get(`/api/v1/products/product-image/${id}`);
-  //       if (data?.success) {
-  //         setImage(data?.products);
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //       toast.error("Something Went Wrong While Fetching The Product!");
-  //     }
-  //   };
-
   //*LIFECYCLE METHOD
   useEffect(() => {
     getAllProducts();
@@ -42,7 +29,7 @@ const Products = () => {
 
   return (
     <Layout title={"Dashboard - All Users"}>
-      <div className="container-fluid m-3 p-3">
+      <div className="container-fluid p-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
