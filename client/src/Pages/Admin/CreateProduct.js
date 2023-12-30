@@ -37,6 +37,34 @@ const CreateProduct = () => {
   //*handle Create Product Button
   const handleCreateProductBtn = async (e) => {
     e.preventDefault();
+
+    // Validate if all fields are filled
+    if (!category) {
+      alert("CATEGORY field is empty!");
+      return;
+    }
+    if (!name) {
+      alert("NAME field is empty!");
+      return;
+    }
+    if (!description) {
+      alert("DESCRIPTION field is empty!");
+      return;
+    }
+    if (!price) {
+      alert("PRICE field is empty!");
+      return;
+    }
+
+    if (!quantity) {
+      alert("QUANTITY field is empty!");
+      return;
+    }
+    if (!image) {
+      alert("PRICE field is empty!");
+      return;
+    }
+
     try {
       const productData = new FormData();
       productData.append("name", name);
@@ -45,6 +73,7 @@ const CreateProduct = () => {
       productData.append("quantity", quantity);
       productData.append("image", image);
       productData.append("category", category);
+      productData.append("shipping", shipping);
 
       const { data } = await axios.post(
         "/api/v1/products/create-product",
@@ -124,11 +153,12 @@ const CreateProduct = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <input
+                  <textarea
                     type="text"
                     value={description}
                     placeholder="Enter the description of product"
                     className="form-control"
+                    style={{ height: "6rem" }}
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
@@ -157,12 +187,12 @@ const CreateProduct = () => {
                     size="large"
                     showSearch
                     className="form-select mb-3"
-                    onchange={(value) => {
+                    onChange={(value) => {
                       setShipping(value);
                     }}
                   >
-                    <Option value="1">Yes</Option>
-                    <Option value="0">No</Option>
+                    <Option value={true}>Yes</Option>
+                    <Option value={false}>No</Option>
                   </Select>
                 </div>
                 <div className="mb-3">

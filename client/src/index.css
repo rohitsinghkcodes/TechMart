@@ -12,12 +12,12 @@ font-family: 'Poppins', sans-serif; */
 /* #####################
 BODY CSS
 ##################### */
-body {
-  background-color: rgb(145, 127, 234);
-  /* background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
+/* body {
+  
+  background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
   font-family: "Poppins", sans-serif;
-  color: wheat; */
-}
+  color: wheat;
+} */
 
 /* #####################
 NAVBAR CSS
@@ -158,10 +158,9 @@ CONTACT PAGE CSS
   user-select: none;
 }
 
-
 /* PRODUCT link */
-.product-link{
+.product-link {
   text-decoration: none !important;
   color: black !important;
-
 }
+

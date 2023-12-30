@@ -32,6 +32,7 @@ const UpdateProduct = () => {
         setPrice(data?.product.price);
         setCategory(data?.product.category._id);
         setQuantity(data?.product.quantity);
+        setShipping(data?.product.shipping);
       }
     } catch (err) {
       console.log(err);
@@ -72,6 +73,7 @@ const UpdateProduct = () => {
       productData.append("quantity", quantity);
       image && productData.append("image", image);
       productData.append("category", category);
+      productData.append("shipping", shipping);
 
       const { data } = await axios.put(
         `/api/v1/products/update-product/${id}`,
@@ -94,7 +96,7 @@ const UpdateProduct = () => {
     e.preventDefault();
     try {
       const confirm = window.prompt(
-        "Are you sure, you want to delete this product?"
+        'Type "yes" if you sure, you want to delete this product?'
       );
       if (!confirm) return;
       const { data } = await axios.delete(
@@ -145,6 +147,7 @@ const UpdateProduct = () => {
                   <label className="btn btn-outline-secondary col-md-12">
                     {image ? image.name : "Change Image"}
                     <input
+                      required
                       type="file"
                       name="image"
                       accept="image/*"
@@ -184,11 +187,12 @@ const UpdateProduct = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <input
+                  <textarea
                     type="text"
                     value={description}
                     placeholder="Enter the description of product"
                     className="form-control"
+                    style={{ height: "6rem" }}
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
@@ -217,10 +221,10 @@ const UpdateProduct = () => {
                     size="large"
                     showSearch
                     className="form-select mb-3"
-                    onchange={(value) => {
+                    value={shipping ?"Yes" :"No"}
+                    onChange={(value) => {
                       setShipping(value);
                     }}
-                    value={shipping ? "Yes" : "No"}
                   >
                     <Option value="1">Yes</Option>
                     <Option value="0">No</Option>

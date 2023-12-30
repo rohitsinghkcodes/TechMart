@@ -37,22 +37,34 @@ const Products = () => {
           <div className="col-md-9">
             <div className="card m-4 p-3">
               <h3 className="text-center">All Products List</h3>
-              <div className="d-flex m-2">
+              <div className="d-flex flex-wrap m-2">
                 {products?.map((product) => (
                   <Link
                     key={product._id}
                     to={`/dashboard/admin/update-product/${product.slug}`}
                     className="product-link"
                   >
-                    <div className="card m-2" style={{ width: "18rem" }}>
+                    <div
+                      className="card m-2"
+                      style={{ width: "13rem", height: "24rem" }}
+                    >
                       <img
                         src={`/api/v1/products/product-image/${product._id}`}
                         className="card-img-top"
                         alt={product.name}
                       />
                       <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
-                        <p className="card-text">{product.description}</p>
+                        <h6 className="card-title">{product.name}</h6>
+                        <p
+                          className="card-text"
+                          style={{
+                            maxHeight: "6em",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {product.description}
+                        </p>
                       </div>
                     </div>
                   </Link>

@@ -5,7 +5,8 @@ import productModel from "../models/productModel.js";
 //* CREATE NEW PRODUCT CONTROLLER
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity } = req.fields;
+    const { name, description, price, category, quantity, shipping } =
+      req.fields;
     const { image } = req.files;
 
     // Validation
@@ -20,6 +21,8 @@ export const createProductController = async (req, res) => {
         return res.status(500).send({ error: "category is required!" });
       case !quantity:
         return res.status(500).send({ error: "quantity is required!" });
+      case !shipping:
+        return res.status(500).send({ error: "shipping is required!" });
       case image && image.size > 1000000:
         return res
           .status(500)
@@ -140,7 +143,8 @@ export const deleteProductController = async (req, res) => {
 //* UPDATE PRODUCT CONTROLLER
 export const updateProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity } = req.fields;
+    const { name, description, price, category, quantity, shipping } =
+      req.fields;
     const { image } = req.files;
 
     // Validation
@@ -155,6 +159,8 @@ export const updateProductController = async (req, res) => {
         return res.status(500).send({ error: "category is required!" });
       case !quantity:
         return res.status(500).send({ error: "quantity is required!" });
+      case !shipping:
+        return res.status(500).send({ error: "shipping is required!" });
       case image && image.size > 1000000:
         return res
           .status(500)
