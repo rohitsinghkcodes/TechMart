@@ -177,7 +177,16 @@ const HomePage = () => {
                             color: "#565959",
                           }}
                         >
-                          {product.MRP}
+                          ₹{product.MRP}
+                        </span>
+                        <span
+                          className="ms-1"
+                          style={{
+                            fontSize: "14px",
+                            color: "#0F1111",
+                          }}
+                        >
+                          ({(100 * product.price) / product.MRP}% off)
                         </span>
                       </span>
                     </h6>
