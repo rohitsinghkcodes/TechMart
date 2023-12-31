@@ -192,3 +192,24 @@ export const updateProductController = async (req, res) => {
       .send({ success: false, msg: "Error In Product Update!", err });
   }
 };
+
+//* GET FILTER PRODUCTS CONTROLLER
+export const filterProductController = async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const products = await productModel.find(args);
+    res.status(200).send({
+      success: true,
+      msg: "PRODUCTS FILTERED SUCCESSFULLY!",
+      products,
+    });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send({ success: false, msg: "Error While Filtering Products!", err });
+  }
+};

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layouts/Layout.js";
 import axios from "axios";
-import { Link, json } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
 
@@ -40,10 +39,11 @@ const HomePage = () => {
     }
   };
   useEffect(() => {
-    getAllProducts();
-  }, []);
+    if (checked.length || radio.length) filterProduct();
+    else getAllProducts();
+  }, [checked, radio]);
 
-  //*Filter by category
+  //*SETTING FILTERS
   const handleFilter = (value, id) => {
     let all = [...checked];
     if (value) {
@@ -53,91 +53,162 @@ const HomePage = () => {
     }
     setChecked(all);
   };
+
+  //*GET ALL FILTERS
+  const filterProduct = async () => {
+    try {
+      const { data } = await axios.post("/api/v1/products/product-filters", {
+        checked,
+        radio,
+      });
+      if (data?.success) {
+        setProducts(data?.products);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //*CLEAR ALL FILTERS
+  const clearAllFilters = () => {
+    setRadio([]);
+    setChecked([]);
+  };
+
   return (
     <Layout title={"All products | Best Offers"}>
       <div className="row mt-3">
+        {/* ########### FILTER PART STARTS HERE ########### */}
         <div className="col-md-2">
-          <h4 className="text-center">Filter By Category</h4>
-
-          <div className="d-flex flex-column">
+          <h4 className="mt-3 ms-3">Filter By Category</h4>
+          <div className="d-flex flex-column md-3 ms-3">
             {categories.map((c) => (
               <Checkbox
                 key={c._id}
+                value={c.name}
                 onChange={(e) => handleFilter(e.target.checked, c._id)}
+                checked={checked.includes(c._id)}
               >
                 {c.name}
               </Checkbox>
             ))}
           </div>
-          <h4 className="text-center">Filter By Price</h4>
-          <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+          <h4 className="mt-3 ms-3">Filter By Price</h4>
+          <Radio.Group
+            value={radio}
+            onChange={(e) => setRadio(e.target.value)}
+            className="md-3 ms-3"
+          >
             {Prices?.map((p) => (
               <div key={p._id}>
                 <Radio value={p.array}>{p.name}</Radio>
               </div>
             ))}
           </Radio.Group>
-          <div className="d-flex flex-column"></div>
+          <button className="btn btn-danger m-3" onClick={clearAllFilters}>
+            Clear Filters
+          </button>
         </div>
+        {/* ########### FILTER PART ENDS HERE ########### */}
+        {/* ########### PRODUCT PART STARTS HERE ########### */}
         <div className="col-md-10">
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
-            {products?.map((product) => (
-              <div
-                className="card m-2"
-                style={{ width: "18rem" }}
-                key={product._id}
-              >
-                <img
-                  src={`/api/v1/products/product-image/${product._id}`}
-                  className="card-img-top"
-                  alt={product.name}
-                />
-                <div className="card-body">
-                  <h6
-                    className="card-title"
-                    style={{
-                      overflow: "hidden",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 1,
-                      WebkitBoxOrient: "vertical",
-                      fontSize: "16px",
-                    }}
-                  >
-                    ₹ {product.name}.00
-                  </h6>
-                  <p
-                    className="card-text"
-                    style={{
-                      overflow: "hidden",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                    }}
-                  >
-                    {product.description}
-                  </p>
-                  <h6
-                    className="card-title"
-                    style={{
-                      fontSize: "28px",
-                    }}
-                  >
-                    ₹ {product.price}.00
-                  </h6>
-                  <div></div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <button className="btn btn-primary ">More details</button>
-                    <button className="btn btn-danger ">Add to cart</button>
+            {products.length > 0 ? (
+              products?.map((product) => (
+                <div
+                  className="card m-2"
+                  style={{ width: "18rem" }}
+                  key={product._id}
+                >
+                  <img
+                    src={`/api/v1/products/product-image/${product._id}`}
+                    className="card-img-top"
+                    alt={product.name}
+                  />
+                  <div className="card-body">
+                    <h6
+                      className="card-title"
+                      style={{
+                        overflow: "hidden",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: "vertical",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {product.name}
+                    </h6>
+                    <p
+                      className="card-text"
+                      style={{
+                        overflow: "hidden",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      {product.description}
+                    </p>
+                    <h6
+                      className="card-title"
+                      style={{
+                        fontSize: "28px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          color: "#0f1111",
+                          verticalAlign: "super",
+                        }}
+                      >
+                        ₹
+                      </span>
+                      {product.price}
+                      <span
+                        className="ms-1"
+                        style={{ fontSize: "14px", color: "#565959" }}
+                      >
+                        MRP:{" "}
+                        <span
+                          style={{
+                            textDecoration: "line-through",
+                            fontSize: "13px",
+                            color: "#565959",
+                          }}
+                        >
+                          {product.price * 2}
+                        </span>
+                      </span>
+                    </h6>
+
+                    <button
+                      className="btn btn-info mt-2"
+                      style={{
+                        minWidth: "50%",
+                        borderRadius: "16px 0px 0px 16px",
+                      }}
+                    >
+                      More details
+                    </button>
+                    <button
+                      className="btn btn-warning mt-2"
+                      style={{
+                        minWidth: "50%",
+                        borderRadius: "0px 16px 16px 0px",
+                      }}
+                    >
+                      Add to cart
+                    </button>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <h4 className="text-center text-secondary mt-5">
+                No result found for selected filters
+              </h4>
+            )}
           </div>
         </div>
       </div>
