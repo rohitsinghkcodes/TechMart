@@ -177,7 +177,7 @@ const HomePage = () => {
                             color: "#565959",
                           }}
                         >
-                          {product.offer}
+                          {product.MRP}
                         </span>
                       </span>
                     </h6>

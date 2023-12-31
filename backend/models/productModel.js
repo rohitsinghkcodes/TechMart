@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    offer: {
+    MRP: {
       type: Number,
       default: 0,
     },

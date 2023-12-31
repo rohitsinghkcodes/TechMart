@@ -5,7 +5,7 @@ import productModel from "../models/productModel.js";
 //* CREATE NEW PRODUCT CONTROLLER
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity,offer, shipping } =
+    const { name, description, price, category, quantity,MRP, shipping } =
       req.fields;
     const { image } = req.files;
 
@@ -143,7 +143,7 @@ export const deleteProductController = async (req, res) => {
 //* UPDATE PRODUCT CONTROLLER
 export const updateProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity,offer, shipping } =
+    const { name, description, price, category, quantity,MRP, shipping } =
       req.fields;
     const { image } = req.files;
 

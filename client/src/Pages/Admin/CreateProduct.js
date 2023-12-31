@@ -15,7 +15,7 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
-  const [offer, setOffer] = useState("");
+  const [MRP, setMRP] = useState("");
   const [image, setImage] = useState("");
 
   //* GET ALL CATEGORIES
@@ -192,13 +192,13 @@ const CreateProduct = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">Product Offer</label>
+                  <label className="form-label text-dark">Product MRP</label>
                   <input
                     type="number"
-                    value={offer}
-                    placeholder="Enter the offer for this product"
+                    value={MRP}
+                    placeholder="Enter the MRP for this product"
                     className="form-control"
-                    onChange={(e) => setOffer(e.target.value)}
+                    onChange={(e) => setMRP(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
