@@ -23,6 +23,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    offer: {
+      type: Number,
+      default: 0,
+    },
     image: {
       data: Buffer,
       contentType: String,

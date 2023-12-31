@@ -112,7 +112,6 @@ const HomePage = () => {
         {/* ########### FILTER PART ENDS HERE ########### */}
         {/* ########### PRODUCT PART STARTS HERE ########### */}
         <div className="col-md-10">
-          <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products.length > 0 ? (
               products?.map((product) => (
@@ -178,7 +177,7 @@ const HomePage = () => {
                             color: "#565959",
                           }}
                         >
-                          {product.price * 2}
+                          {product.offer}
                         </span>
                       </span>
                     </h6>

@@ -15,6 +15,7 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
+  const [offer, setOffer] = useState("");
   const [image, setImage] = useState("");
 
   //* GET ALL CATEGORIES
@@ -119,7 +120,7 @@ const CreateProduct = () => {
                   ))}
                 </Select>
 
-                <div className="mb-3">
+                <div className="mb-4">
                   <label className="btn btn-outline-secondary col-md-12">
                     {image ? image.name : "Upload Image"}
                     <input
@@ -131,7 +132,7 @@ const CreateProduct = () => {
                     />
                   </label>
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
                   {image && (
                     <div className="text-center">
                       <img
@@ -143,7 +144,8 @@ const CreateProduct = () => {
                     </div>
                   )}
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">Product Title</label>
                   <input
                     type="text"
                     value={name}
@@ -152,7 +154,10 @@ const CreateProduct = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">
+                    Product Description
+                  </label>
                   <textarea
                     type="text"
                     value={description}
@@ -162,7 +167,10 @@ const CreateProduct = () => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">
+                    Product Pricing
+                  </label>
                   <input
                     type="number"
                     value={price}
@@ -171,7 +179,10 @@ const CreateProduct = () => {
                     onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">
+                    Product Quantity
+                  </label>
                   <input
                     type="number"
                     value={quantity}
@@ -180,7 +191,18 @@ const CreateProduct = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">Product Offer</label>
+                  <input
+                    type="number"
+                    value={offer}
+                    placeholder="Enter the offer for this product"
+                    className="form-control"
+                    onChange={(e) => setOffer(e.target.value)}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="form-label text-dark">Is Shipping?</label>
                   <Select
                     bordered={false}
                     placeholder="Select Shipping Option"
@@ -195,7 +217,7 @@ const CreateProduct = () => {
                     <Option value={false}>No</Option>
                   </Select>
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
                   <button
                     className="btn btn-primary"
                     onClick={handleCreateProductBtn}

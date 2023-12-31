@@ -15,6 +15,7 @@ const UpdateProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [offer, setOffer] = useState("");
   const [shipping, setShipping] = useState("");
   const [image, setImage] = useState("");
   const [id, setId] = useState("");
@@ -33,6 +34,7 @@ const UpdateProduct = () => {
         setCategory(data?.product.category._id);
         setQuantity(data?.product.quantity);
         setShipping(data?.product.shipping);
+        setOffer(data?.product.offer);
       }
     } catch (err) {
       console.log(err);
@@ -71,6 +73,7 @@ const UpdateProduct = () => {
       productData.append("description", description);
       productData.append("price", price);
       productData.append("quantity", quantity);
+      productData.append("offer", offer);
       image && productData.append("image", image);
       productData.append("category", category);
       productData.append("shipping", shipping);
@@ -87,7 +90,7 @@ const UpdateProduct = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something Went Wrong In Updating THe Product!");
+      alert("Something Went Wrong In Updating The Product!");
     }
   };
 
@@ -156,7 +159,7 @@ const UpdateProduct = () => {
                     />
                   </label>
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
                   {image ? (
                     <div className="text-center">
                       <img
@@ -177,7 +180,8 @@ const UpdateProduct = () => {
                     </div>
                   )}
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">Product Title</label>
                   <input
                     type="text"
                     value={name}
@@ -186,7 +190,11 @@ const UpdateProduct = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">
+                    Product Description
+                  </label>
+
                   <textarea
                     type="text"
                     value={description}
@@ -196,7 +204,11 @@ const UpdateProduct = () => {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">
+                    Product Pricing
+                  </label>
+
                   <input
                     type="number"
                     value={price}
@@ -205,7 +217,11 @@ const UpdateProduct = () => {
                     onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">
+                    Product Quantity
+                  </label>
+
                   <input
                     type="number"
                     value={quantity}
@@ -214,14 +230,26 @@ const UpdateProduct = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
+                  <label className="form-label text-dark">Product Offer</label>
+                  <input
+                    type="number"
+                    value={offer}
+                    placeholder="Enter the offer for this product"
+                    className="form-control"
+                    onChange={(e) => setOffer(e.target.value)}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="form-label text-dark">Is Shipping?</label>
+
                   <Select
                     bordered={false}
                     placeholder="Select Shipping Option"
                     size="large"
                     showSearch
                     className="form-select mb-3"
-                    value={shipping ?"Yes" :"No"}
+                    value={shipping ? "Yes" : "No"}
                     onChange={(value) => {
                       setShipping(value);
                     }}
@@ -230,7 +258,7 @@ const UpdateProduct = () => {
                     <Option value="0">No</Option>
                   </Select>
                 </div>
-                <div className="mb-3 ">
+                <div className="mb-4 ">
                   <button
                     className="btn btn-primary mx-3"
                     onClick={handleUpdateProductBtn}
