@@ -164,3 +164,9 @@ CONTACT PAGE CSS
   color: black !important;
 }
 
+
+
+/* ROW CSS */
+.row{
+  margin-right: 0;
+}

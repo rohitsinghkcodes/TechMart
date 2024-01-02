@@ -118,9 +118,9 @@ const HomePage = () => {
 
   return (
     <Layout title={"All products | Best Offers"}>
-      <div className="row mt-3">
+      <div className="row  mt-3">
         {/* ########### FILTER PART STARTS HERE ########### */}
-        <div className="col-md-2">
+        <div className="col-md-2 ">
           <h4 className="mt-3 ms-3">Filter By Category</h4>
           <div className="d-flex flex-column md-3 ms-3">
             {categories.map((c) => (
@@ -230,7 +230,9 @@ const HomePage = () => {
                         >
                           (
                           {product.MRP
-                            ? 100 - (100 * product.price) / product.MRP
+                            ? Math.round(
+                                100 - (100 * product.price) / product.MRP
+                              )
                             : 0}
                           % off)
                         </span>
@@ -264,13 +266,13 @@ const HomePage = () => {
               </h4>
             )}
           </div>
-          <div>
+          <div className="text-center">
             {products &&
               products.length < total &&
               !radio.length &&
               !checked.length && (
                 <button
-                  className="btn btn-success m-3 text-center"
+                  className="btn btn-primary m-3 text-center px-5 py-2 rounded-5"
                   onClick={(e) => {
                     e.preventDefault();
                     setPage(page + 1);
