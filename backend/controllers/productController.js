@@ -5,7 +5,7 @@ import productModel from "../models/productModel.js";
 //* CREATE NEW PRODUCT CONTROLLER
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity,MRP, shipping } =
+    const { name, description, price, category, quantity, MRP, shipping } =
       req.fields;
     const { image } = req.files;
 
@@ -143,7 +143,7 @@ export const deleteProductController = async (req, res) => {
 //* UPDATE PRODUCT CONTROLLER
 export const updateProductController = async (req, res) => {
   try {
-    const { name, description, price, category, quantity,MRP, shipping } =
+    const { name, description, price, category, quantity, MRP, shipping } =
       req.fields;
     const { image } = req.files;
 
@@ -211,5 +211,51 @@ export const filterProductController = async (req, res) => {
     res
       .status(500)
       .send({ success: false, msg: "Error While Filtering Products!", err });
+  }
+};
+
+//* GET PRODUCT COUNT CONTROLLER
+export const productCountController = async (req, res) => {
+  try {
+    const total = await productModel.find({}).estimatedDocumentCount();
+
+    res.status(200).send({
+      success: true,
+      msg: "PRODUCTS COUNTED SUCCESSFULLY!",
+      total,
+    });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send({ success: false, msg: "Error While Counting Products!", err });
+  }
+};
+
+//* GET PRODUCTS LIST BY PAGE CONTROLLER
+export const productListByPageController = async (req, res) => {
+  try {
+    const perPage = 4;
+    const page = req.params.page ? req.params.page : 1;
+
+    const products = await productModel
+      .find({})
+      .select("-image")
+      .skip((page - 1) * perPage) // Corrected calculation for skip
+      .limit(perPage)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      msg: "ALL PRODUCTS IN PAGE FETCHED SUCCESSFULLY!",
+      products,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error While Fetching Products-List by page!",
+      err,
+    });
   }
 };

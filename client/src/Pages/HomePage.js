@@ -9,6 +9,9 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   //* GET ALL CATEGORIES
   const getAllCategories = async () => {
@@ -24,17 +27,22 @@ const HomePage = () => {
 
   useEffect(() => {
     getAllCategories();
+    getTotal();
+    // eslint-disable-next-line
   }, []);
 
   //*GEt ALL PRODUCTS
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/products/get-products");
+      setIsLoading(true);
+      const { data } = await axios.get(`/api/v1/products/product-list/${page}`);
+      setIsLoading(false);
       if (data?.success) {
         setProducts(data?.products);
       }
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       alert("Something went wrong in getting products!");
     }
   };
@@ -42,6 +50,39 @@ const HomePage = () => {
     if (checked.length || radio.length) filterProduct();
     else getAllProducts();
   }, [checked, radio]);
+
+  //*GET TOTAL COUNT
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/products/product-count");
+      if (data?.success) {
+        setTotal(data?.total);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (page === 1) return;
+    loadMoreProducts();
+  }, [page]);
+
+  //*GEt LOAD MORE PRODUCTS
+  const loadMoreProducts = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(`/api/v1/products/product-list/${page}`);
+      setIsLoading(false);
+      if (data?.success) {
+        setProducts([...products, ...data?.products]);
+      }
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+      alert("Something went wrong in loading more products!");
+    }
+  };
 
   //*SETTING FILTERS
   const handleFilter = (value, id) => {
@@ -110,6 +151,7 @@ const HomePage = () => {
           </button>
         </div>
         {/* ########### FILTER PART ENDS HERE ########### */}
+
         {/* ########### PRODUCT PART STARTS HERE ########### */}
         <div className="col-md-10">
           <div className="d-flex flex-wrap">
@@ -177,7 +219,7 @@ const HomePage = () => {
                             color: "#565959",
                           }}
                         >
-                          ₹{product.MRP}
+                          ₹{product.MRP ? product.MRP : product.price}
                         </span>
                         <span
                           className="ms-1"
@@ -186,7 +228,11 @@ const HomePage = () => {
                             color: "#0F1111",
                           }}
                         >
-                          ({(100 * product.price) / product.MRP}% off)
+                          (
+                          {product.MRP
+                            ? 100 - (100 * product.price) / product.MRP
+                            : 0}
+                          % off)
                         </span>
                       </span>
                     </h6>
@@ -217,6 +263,22 @@ const HomePage = () => {
                 No result found for selected filters
               </h4>
             )}
+          </div>
+          <div>
+            {products &&
+              products.length < total &&
+              !radio.length &&
+              !checked.length && (
+                <button
+                  className="btn btn-success m-3 text-center"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage(page + 1);
+                  }}
+                >
+                  {isLoading ? "Loading..." : "Load more"}
+                </button>
+              )}
           </div>
         </div>
       </div>
