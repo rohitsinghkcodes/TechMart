@@ -3,6 +3,7 @@ import Layout from "../Components/Layouts/Layout.js";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
+import { FaAnglesDown } from "react-icons/fa6";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -121,10 +122,11 @@ const HomePage = () => {
       <div className="row  mt-3">
         {/* ########### FILTER PART STARTS HERE ########### */}
         <div className="col-md-2 ">
-          <h4 className="mt-3 ms-3">Filter By Category</h4>
-          <div className="d-flex flex-column md-3 ms-3">
+          <h4 className="mt-3 ms-3 filter-title">Category</h4>
+          <div className="d-flex flex-column filter-items md-3 ms-3">
             {categories.map((c) => (
               <Checkbox
+              className="filter-items"
                 key={c._id}
                 value={c.name}
                 onChange={(e) => handleFilter(e.target.checked, c._id)}
@@ -134,7 +136,7 @@ const HomePage = () => {
               </Checkbox>
             ))}
           </div>
-          <h4 className="mt-3 ms-3">Filter By Price</h4>
+          <h4 className="mt-3 ms-3 filter-title">Price</h4>
           <Radio.Group
             value={radio}
             onChange={(e) => setRadio(e.target.value)}
@@ -142,7 +144,7 @@ const HomePage = () => {
           >
             {Prices?.map((p) => (
               <div key={p._id}>
-                <Radio value={p.array}>{p.name}</Radio>
+                <Radio className="filter-items" value={p.array}>{p.name}</Radio>
               </div>
             ))}
           </Radio.Group>
@@ -158,13 +160,13 @@ const HomePage = () => {
             {products.length > 0 ? (
               products?.map((product) => (
                 <div
-                  className="card m-2"
-                  style={{ width: "18rem" }}
+                  className="card m-2 product-card"
+                  style={{ width: "18rem"}}
                   key={product._id}
                 >
                   <img
                     src={`/api/v1/products/product-image/${product._id}`}
-                    className="card-img-top"
+                    className="product-img"
                     alt={product.name}
                   />
                   <div className="card-body">
@@ -272,13 +274,13 @@ const HomePage = () => {
               !radio.length &&
               !checked.length && (
                 <button
-                  className="btn btn-primary m-3 text-center px-5 py-2 rounded-5"
+                  className="btn btn-info rounded-4 p-2 m-5"
                   onClick={(e) => {
                     e.preventDefault();
                     setPage(page + 1);
                   }}
                 >
-                  {isLoading ? "Loading..." : "Load more"}
+                  {isLoading ? "Loading..." :"Load More⬇️"}
                 </button>
               )}
           </div>
