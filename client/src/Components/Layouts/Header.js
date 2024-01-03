@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../Context/authContext.js";
+import SearchComponent from "../Form/SearchComponent.js";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -24,7 +25,8 @@ const Header = () => {
         className="navbar navbar-expand-lg bg-body-tertiary "
         data-bs-theme="dark"
       >
-        <div className="container-fluid">
+        <div className="container-fluid" >
+        
           <button
             className="navbar-toggler"
             type="button"
@@ -40,7 +42,9 @@ const Header = () => {
             <Link to="/" className="navbar-brand">
               👜 E-COMMERCE APP
             </Link>
+            <SearchComponent/>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              
               <li className="nav-item">
                 <NavLink to="/categories" className="nav-link" href="#">
                   Categories

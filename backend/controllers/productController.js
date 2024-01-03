@@ -2,7 +2,7 @@ import slugify from "slugify";
 import fs from "fs";
 import productModel from "../models/productModel.js";
 
-//* CREATE NEW PRODUCT CONTROLLER
+//* CREATE NEW PRODUCT CONTROLLER || POST
 export const createProductController = async (req, res) => {
   try {
     const { name, description, price, category, quantity, MRP, shipping } =
@@ -54,7 +54,7 @@ export const createProductController = async (req, res) => {
   }
 };
 
-//* GET ALL PRODUCTS CONTROLLER
+//* ALL PRODUCTS CONTROLLER || GET
 export const getProductsController = async (req, res) => {
   try {
     const products = await productModel
@@ -78,7 +78,7 @@ export const getProductsController = async (req, res) => {
   }
 };
 
-//* GET SINGLE PRODUCT CONTROLLER
+//* SINGLE PRODUCT CONTROLLER || GET
 export const getSingleProductController = async (req, res) => {
   try {
     const product = await productModel
@@ -104,7 +104,7 @@ export const getSingleProductController = async (req, res) => {
   }
 };
 
-//* GET PRODUCT IMAGE CONTROLLER
+//* PRODUCT IMAGE CONTROLLER || GET
 export const productImageController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid).select("image");
@@ -121,7 +121,7 @@ export const productImageController = async (req, res) => {
   }
 };
 
-//* DELETE PRODUCT CONTROLLER
+//* DELETE PRODUCT CONTROLLER || DELETE
 export const deleteProductController = async (req, res) => {
   try {
     const deletedProduct = await productModel
@@ -140,7 +140,7 @@ export const deleteProductController = async (req, res) => {
   }
 };
 
-//* UPDATE PRODUCT CONTROLLER
+//* UPDATE PRODUCT CONTROLLER || PUT
 export const updateProductController = async (req, res) => {
   try {
     const { name, description, price, category, quantity, MRP, shipping } =
@@ -193,7 +193,7 @@ export const updateProductController = async (req, res) => {
   }
 };
 
-//* GET FILTER PRODUCTS CONTROLLER
+//* GET FILTER PRODUCTS CONTROLLER || GET
 export const filterProductController = async (req, res) => {
   try {
     const { checked, radio } = req.body;
@@ -214,7 +214,7 @@ export const filterProductController = async (req, res) => {
   }
 };
 
-//* GET PRODUCT COUNT CONTROLLER
+//* PRODUCT COUNT CONTROLLER || GET
 export const productCountController = async (req, res) => {
   try {
     const total = await productModel.find({}).estimatedDocumentCount();
@@ -232,7 +232,7 @@ export const productCountController = async (req, res) => {
   }
 };
 
-//* GET PRODUCTS LIST BY PAGE CONTROLLER
+//* PRODUCTS LIST BY PAGE CONTROLLER || GET
 export const productListByPageController = async (req, res) => {
   try {
     const perPage = 4;
@@ -259,3 +259,52 @@ export const productListByPageController = async (req, res) => {
     });
   }
 };
+
+//* SEARCH PRODUCTS CONTROLLER || GET
+export const searchProductController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const results = await productModel
+      .find({
+        $or: [
+          { name: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+        ],
+      })
+      .select("-image");
+
+    res.json(results);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error While Searching Products!",
+      err,
+    });
+  }
+};
+
+
+
+
+// // New controller for fetching search suggestions
+// export const searchProductSuggestionsController = async (req, res) => {
+//   try {
+//     const { keyword } = req.params;
+
+//     // Implement your logic to fetch suggestions based on the keyword
+//     // For simplicity, this example uses a regex to match product names
+//     const suggestions = await productModel
+//       .find({ name: { $regex: keyword, $options: 'i' } })
+//       .select('name')
+//       .limit(5);
+
+//     // Extract suggestion values from the results
+//     const suggestionValues = suggestions.map(product => product.name);
+
+//     res.json({ success: true, suggestions: suggestionValues });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ success: false, message: 'Internal Server Error' });
+//   }
+// };
