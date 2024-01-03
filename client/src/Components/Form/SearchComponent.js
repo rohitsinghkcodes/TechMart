@@ -24,16 +24,16 @@ const SearchComponent = () => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
   <input
-    className="form-control mr-sm-2 rounded-right-5"
+    className="form-control mr-sm-2 rounded-right-5 search-field"
     type="search"
-    placeholder="Search"
+    placeholder="Search "
     aria-label="Search"
     value={values.keyword}
     onChange={(e) => setValues({ ...values, keyword: e.target.value })}
     style={{ borderRadius: "20px 0 0 20px", flex: 1 }}
   />
   <button
-    className="btn rounded-10 btn-success my-2 my-sm-0"
+    className="btn search-btn my-2 my-sm-0"
     style={{ borderRadius: "0 20px 20px 0" }}
     type="submit"
     onClick={handleSubmitBtn}

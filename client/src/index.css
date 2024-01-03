@@ -13,7 +13,6 @@ font-family: 'Poppins', sans-serif; */
 BODY CSS
 ##################### */
 /* body {
-  
   background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
   font-family: "Poppins", sans-serif;
   color: wheat;
@@ -164,9 +163,45 @@ CONTACT PAGE CSS
   color: black !important;
 }
 
-
-
 /* ROW CSS */
-.row{
+.row {
   margin-right: 0;
+}
+
+/* SEARCH BAR CSS */
+.searchBox {
+  margin-left: auto;
+  min-width: 50%;
+}
+
+.search-field {
+  color: #c5c5c5 !important;
+  border-left: 1px solid #82032d34;
+  border-top: 1px solid #82032d34;
+  border-bottom: 1px solid #82032d34;
+  border-right: none;
+
+  background-color: #807f7f35;
+}
+
+.search-field::placeholder {
+  color: #ffffff6e !important;
+  background-color: transparent !important;
+}
+
+.search-field:focus {
+  box-shadow: 0 0 5px rgba(250, 126, 126, 0.5) !important;
+  border-color: #98093966 !important;
+  background-color: #0000005a;
+  border-radius: 20px;
+}
+
+.search-btn {
+  background-color: #82032de2 !important;
+}
+.search-btn:hover {
+  background-color: #9c0034 !important;
+}
+.search-btn:focus {
+  border-color: #9c0034 !important;
 }

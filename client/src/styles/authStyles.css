@@ -33,7 +33,10 @@
 .input-field::placeholder {
   color: #999999c4 !important; /* Set the desired color */
 }
-
+.input-field:focus {
+  border-color: #82032e !important;
+  box-shadow: 0 0 5px rgba(250, 126, 126, 0.5) !important;
+}
 
 .form-container form button {
   margin-top: 4px;

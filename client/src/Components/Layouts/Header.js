@@ -42,7 +42,10 @@ const Header = () => {
             <Link to="/" className="navbar-brand">
               👜 E-COMMERCE APP
             </Link>
+            <div className="searchBox">
             <SearchComponent/>
+            </div>
+            
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               
               <li className="nav-item">
