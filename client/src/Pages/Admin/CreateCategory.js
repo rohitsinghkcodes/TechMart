@@ -88,15 +88,15 @@ const CreateCategory = () => {
 
   return (
     <Layout title={"Dashboard - Categories"}>
-      <div className="text-center container-fluid p-3">
+      <div className="text-center container-fluid p-3" >
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="card m-4 p-3">
+            <div className="card card-dash p-5 rounded-5">
               <h3>Manage Categories</h3>
-              <div className="my-3 ">
+              <div className="my-3 " >
                 <CategoryForm
                   handleSubmit={handleSubmit}
                   value={name}

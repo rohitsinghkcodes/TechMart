@@ -184,18 +184,19 @@ CONTACT PAGE CSS
   border-bottom: 1px solid #82032d34;
   border-right: none;
 
-  background-color: #807f7f35;
+  background-color: #43424235;
 }
 
 .search-field::placeholder {
-  color: #ffffff6e !important;
+  color: #ffffff80 !important;
   background-color: transparent !important;
+  font-size: 15px;
 }
 
 .search-field:focus {
-  box-shadow: 0 0 5px rgba(250, 126, 126, 0.5) !important;
-  border-color: #98093966 !important;
-  background-color: #0000005a;
+  box-shadow: 0 0 5px rgba(255, 112, 112, 0.658) !important;
+  border-color: #ba003e8d !important;
+  background-color: #58585835;
   border-radius: 20px;
 }
 
@@ -221,14 +222,7 @@ CONTACT PAGE CSS
   border-radius: 20px 20px 0 0;
 }
 
-/* Load More btn */
-.load-more-btn {
-  border: none;
-  background-color: rgb(255, 191, 0);
-
-}
-
-/* Filters CSS */
+/* FILTERS CSS */
 .filter-title {
   font-size: 14px;
   color: #dcdcdc;
@@ -238,3 +232,27 @@ CONTACT PAGE CSS
   color: #dcdcdc !important;
   font-size: 14px;
 }
+
+.card-dash {
+  background-color: #31313120;
+  color: wheat;
+}
+
+.submit-btn {
+  margin-top: 4px;
+  border: none;
+  border-radius: 5px;
+  background-color: #b52454;
+  color: white;
+}
+
+.submit-btn :hover {
+  background: #6d1e38;
+  background: -webkit-linear-gradient(to right, #800c33, #800c33);
+  background: linear-gradient(to right, #800c33, #800c33);
+}
+
+.form-select {
+  color: white !important;
+}
+

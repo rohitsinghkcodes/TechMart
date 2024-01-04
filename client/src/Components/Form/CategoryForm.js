@@ -6,7 +6,7 @@ const CategoryForm = ({ handleSubmit, value, setValue }) => {
       <div className="col-8">
         <input
           type="text"
-          className="form-control"
+          className="form-control bg-dark input-field"
           placeholder="Enter new category"
           value={value}
           onChange={(e) => setValue(e.target.value)}

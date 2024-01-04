@@ -100,15 +100,15 @@ const CreateProduct = () => {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="card m-4 p-3">
+            <div className="card card-dash p-5 rounded-5">
               <h3>Products Page</h3>
-              <div className="m-1 w-75">
+              <div className="m-1 ">
                 <Select
                   bordered={false}
                   placeholder="Select a category"
                   size="large"
                   showSearch
-                  className="form-select mb-3"
+                  className="form-select bg-dark form-control input-field  mb-3"
                   onChange={(value) => {
                     setCategory(value);
                   }}
@@ -145,70 +145,70 @@ const CreateProduct = () => {
                   )}
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">Product Title</label>
+                  <label className="form-label ">Product Title</label>
                   <input
                     type="text"
                     value={name}
                     placeholder="Enter the name of product"
-                    className="form-control"
+                    className="bg-dark form-control input-field"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">
+                  <label className="form-label text-light">
                     Product Description
                   </label>
                   <textarea
                     type="text"
                     value={description}
                     placeholder="Enter the description of product"
-                    className="form-control"
+                    className="bg-dark form-control input-field"
                     style={{ height: "6rem" }}
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">
+                  <label className="form-label text-light">
                     Product Pricing
                   </label>
                   <input
                     type="number"
                     value={price}
                     placeholder="Enter the price of product"
-                    className="form-control"
+                    className="bg-dark form-control input-field"
                     onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">
+                  <label className="form-label text-light">
                     Product Quantity
                   </label>
                   <input
                     type="number"
                     value={quantity}
                     placeholder="Enter the quantity of product"
-                    className="form-control"
+                    className="bg-dark form-control input-field"
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">Product MRP</label>
+                  <label className="form-label text-light">Product MRP</label>
                   <input
                     type="number"
                     value={MRP}
                     placeholder="Enter the MRP for this product"
-                    className="form-control"
+                    className="bg-dark form-control input-field"
                     onChange={(e) => setMRP(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="form-label text-dark">Is Shipping?</label>
+                  <label className="form-label ">Is Shipping?</label>
                   <Select
                     bordered={false}
                     placeholder="Select Shipping Option"
                     size="large"
                     showSearch
-                    className="form-select mb-3"
+                    className="form-select  bg-dark form-control input-field mb-3"
                     onChange={(value) => {
                       setShipping(value);
                     }}
@@ -219,7 +219,7 @@ const CreateProduct = () => {
                 </div>
                 <div className="mb-4">
                   <button
-                    className="btn btn-primary"
+                    className="btn submit-btn "
                     onClick={handleCreateProductBtn}
                   >
                     Create Product

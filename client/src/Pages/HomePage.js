@@ -178,6 +178,7 @@ const HomePage = () => {
                         WebkitLineClamp: 1,
                         WebkitBoxOrient: "vertical",
                         fontSize: "16px",
+                        fontWeight:"bold"
                       }}
                     >
                       {product.name}

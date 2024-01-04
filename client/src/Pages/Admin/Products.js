@@ -29,13 +29,13 @@ const Products = () => {
 
   return (
     <Layout title={"Dashboard - All Users"}>
-      <div className="container-fluid p-3">
+      <div className="container-fluid p-3" >
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="card m-4 p-3">
+            <div>
               <h3 className="text-center">All Products List</h3>
               <div className="d-flex flex-wrap m-2">
                 {products?.map((product) => (
@@ -45,22 +45,40 @@ const Products = () => {
                     className="product-link"
                   >
                     <div
-                      className="card m-2"
-                      style={{ width: "13rem", height: "24rem" }}
+                      className="card m-2 product-card"
+                      style={{ width: "15rem" }}
                     >
                       <img
                         src={`/api/v1/products/product-image/${product._id}`}
-                        className="card-img-top"
+                        className="product-img"
                         alt={product.name}
                       />
                       <div className="card-body">
-                        <h6 className="card-title">{product.name}</h6>
+                        <h6 className="card-title" style={{ fontSize: "14px" }}>
+                          <b>Price:</b> ₹{product.price} &ensp;&ensp;{" "}
+                          <b>MRP:</b> ₹{product.MRP}
+                        </h6>
+                        <h6
+                          className="card-title"
+                          style={{
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {product.name}
+                        </h6>
                         <p
                           className="card-text"
                           style={{
-                            maxHeight: "6em",
                             overflow: "hidden",
-                            textOverflow: "ellipsis",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            fontSize: "14px",
+                            WebkitBoxOrient: "vertical",
                           }}
                         >
                           {product.description}
