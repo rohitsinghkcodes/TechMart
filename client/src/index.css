@@ -13,10 +13,11 @@ font-family: 'Poppins', sans-serif; */
 BODY CSS
 ##################### */
 body {
-  background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);
-  /* background-image: linear-gradient(0deg, #53ab42 20px, #000000 100%); */
-  font-family: "Poppins", sans-serif;
-  color: wheat;
+  /* background-image: linear-gradient(0deg, #a71344 20px, #000000 100%);  -option 1*/
+  /* background-image: linear-gradient(0deg, #13b0e5 20px, #000000 100%);  -option 2 */
+  background-image: linear-gradient(0deg, #494d49 20px, #505155 100%);
+  /* font-family: "Poppins", sans-serif; */
+  /* color: wheat; */
 }
 
 /* #####################
@@ -27,7 +28,7 @@ NAVBAR CSS
   font-family: "Poppins", sans-serif;
   font-size: 17px;
   line-height: 26px;
-  background-color: transparent !important;
+  background-color: rgb(54, 54, 54) !important;
 }
 
 .navbar-brand {
@@ -256,3 +257,7 @@ CONTACT PAGE CSS
   color: white !important;
 }
 
+/* CREATE PRODUCT - SELELCT  CATEGORY*/
+.set-categ {
+  color: white !important;
+}

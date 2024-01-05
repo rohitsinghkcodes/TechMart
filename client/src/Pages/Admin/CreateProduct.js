@@ -107,8 +107,8 @@ const CreateProduct = () => {
                   bordered={false}
                   placeholder="Select a category"
                   size="large"
-                  showSearch
-                  className="form-select bg-dark form-control input-field  mb-3"
+                  // showSearch
+                  className="form-select bg-dark form-control input-field  mb-3 text-light set-categ"
                   onChange={(value) => {
                     setCategory(value);
                   }}
@@ -207,11 +207,11 @@ const CreateProduct = () => {
                     bordered={false}
                     placeholder="Select Shipping Option"
                     size="large"
-                    showSearch
                     className="form-select  bg-dark form-control input-field mb-3"
                     onChange={(value) => {
                       setShipping(value);
                     }}
+                    placeholderStyle={{ color: "white" }}  
                   >
                     <Option value={true}>Yes</Option>
                     <Option value={false}>No</Option>

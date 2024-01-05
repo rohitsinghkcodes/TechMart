@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/authContext.js";
 import SearchComponent from "../Form/SearchComponent.js";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
-
+  const location = useLocation();
   //clear storage and set auth details after logging out => handled by this funtion
   const handleLogOut = () => {
     setAuth({
@@ -19,14 +19,20 @@ const Header = () => {
     alert("📤 SIGNED OUT SUCCESSFULLY!");
   };
 
+  // Handle th ereload if already on homepage and clicked on the navbar brand
+  const handleReload = () => {
+    if (location.pathname === "/") {
+      window.location.reload();
+    }
+  };
+
   return (
     <>
       <nav
         className="navbar navbar-expand-lg bg-body-tertiary "
         data-bs-theme="dark"
       >
-        <div className="container-fluid" >
-        
+        <div className="container-fluid">
           <button
             className="navbar-toggler"
             type="button"
@@ -39,15 +45,14 @@ const Header = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link to="/" className="navbar-brand">
+            <Link to="/" className="navbar-brand" onClick={handleReload}>
               👜 E-COMMERCE APP
             </Link>
             <div className="searchBox">
-            <SearchComponent/>
+              <SearchComponent />
             </div>
-            
+
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              
               <li className="nav-item">
                 <NavLink to="/categories" className="nav-link" href="#">
                   Categories

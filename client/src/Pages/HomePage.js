@@ -126,7 +126,7 @@ const HomePage = () => {
           <div className="d-flex flex-column filter-items md-3 ms-3">
             {categories.map((c) => (
               <Checkbox
-              className="filter-items"
+                className="filter-items"
                 key={c._id}
                 value={c.name}
                 onChange={(e) => handleFilter(e.target.checked, c._id)}
@@ -144,7 +144,9 @@ const HomePage = () => {
           >
             {Prices?.map((p) => (
               <div key={p._id}>
-                <Radio className="filter-items" value={p.array}>{p.name}</Radio>
+                <Radio className="filter-items" value={p.array}>
+                  {p.name}
+                </Radio>
               </div>
             ))}
           </Radio.Group>
@@ -161,7 +163,7 @@ const HomePage = () => {
               products?.map((product) => (
                 <div
                   className="card m-2 product-card"
-                  style={{ width: "18rem"}}
+                  style={{ width: "18rem" }}
                   key={product._id}
                 >
                   <img
@@ -178,7 +180,7 @@ const HomePage = () => {
                         WebkitLineClamp: 1,
                         WebkitBoxOrient: "vertical",
                         fontSize: "16px",
-                        fontWeight:"bold"
+                        fontWeight: "bold",
                       }}
                     >
                       {product.name}
@@ -281,7 +283,7 @@ const HomePage = () => {
                     setPage(page + 1);
                   }}
                 >
-                  {isLoading ? "Loading..." :"Load More⬇️"}
+                  {isLoading ? "Loading..." : "Load More⬇️"}
                 </button>
               )}
           </div>
