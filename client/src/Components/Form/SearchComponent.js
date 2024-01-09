@@ -2,7 +2,6 @@ import React from "react";
 import { useSearch } from "../../Context/searchContext.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { IoSearchOutline } from "react-icons/io5";
 
 const SearchComponent = () => {
   const [values, setValues] = useSearch();
@@ -15,10 +14,8 @@ const SearchComponent = () => {
         const { data } = await axios.get(
           `/api/v1/products/search/${values.keyword}`
         );
-        if (data?.success) {
-          setValues({ ...values, results: data });
-          navigate("/search");
-        }
+        setValues({ ...values, results: data });
+        navigate("/search");
       } catch (err) {
         console.log(err);
       }

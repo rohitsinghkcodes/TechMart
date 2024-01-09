@@ -284,9 +284,6 @@ export const searchProductController = async (req, res) => {
   }
 };
 
-
-
-
 // // New controller for fetching search suggestions
 // export const searchProductSuggestionsController = async (req, res) => {
 //   try {

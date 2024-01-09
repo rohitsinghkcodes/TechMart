@@ -3,7 +3,6 @@ import Layout from "../Components/Layouts/Layout.js";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
-import { FaAnglesDown } from "react-icons/fa6";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -88,6 +87,7 @@ const HomePage = () => {
   //*SETTING FILTERS
   const handleFilter = (value, id) => {
     let all = [...checked];
+    console.log(value);
     if (value) {
       all.push(id);
     } else {
