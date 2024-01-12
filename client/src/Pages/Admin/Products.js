@@ -45,7 +45,7 @@ const Products = () => {
                     className="product-link"
                   >
                     <div
-                      className="card m-2 product-card"
+                      className="card m-2 product-card2"
                       style={{ width: "15rem" }}
                     >
                       <img

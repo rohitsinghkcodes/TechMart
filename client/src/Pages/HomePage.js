@@ -3,6 +3,7 @@ import Layout from "../Components/Layouts/Layout.js";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -161,109 +162,114 @@ const HomePage = () => {
           <div className="d-flex flex-wrap">
             {products.length > 0 ? (
               products?.map((product) => (
-                <div
-                  className="card m-2 product-card"
-                  style={{ width: "18rem" }}
+                <Link
                   key={product._id}
+                  to={`/product/${product.slug}`}
+                  className="product-link"
                 >
-                  <img
-                    src={`/api/v1/products/product-image/${product._id}`}
-                    className="product-img"
-                    alt={product.name}
-                  />
-                  <div className="card-body">
-                    <h6
-                      className="card-title"
-                      style={{
-                        overflow: "hidden",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 1,
-                        WebkitBoxOrient: "vertical",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {product.name}
-                    </h6>
-                    <p
-                      className="card-text"
-                      style={{
-                        overflow: "hidden",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                      }}
-                    >
-                      {product.description}
-                    </p>
-                    <h6
-                      className="card-title"
-                      style={{
-                        fontSize: "28px",
-                      }}
-                    >
-                      <span
+                  <div
+                    className="card m-2 product-card"
+                    style={{ width: "18rem" }}
+                  >
+                    <img
+                      src={`/api/v1/products/product-image/${product._id}`}
+                      className="product-img"
+                      alt={product.name}
+                    />
+                    <div className="card-body">
+                      <h6
+                        className="card-title"
                         style={{
-                          fontSize: "13px",
-                          color: "#0f1111",
-                          verticalAlign: "super",
+                          overflow: "hidden",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: "vertical",
+                          fontSize: "16px",
+                          fontWeight: "bold",
                         }}
                       >
-                        ₹
-                      </span>
-                      {product.price}
-                      <span
-                        className="ms-1"
-                        style={{ fontSize: "14px", color: "#565959" }}
+                        {product.name}
+                      </h6>
+                      <p
+                        className="card-text"
+                        style={{
+                          overflow: "hidden",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                        }}
                       >
-                        MRP:{" "}
+                        {product.description}
+                      </p>
+                      <h6
+                        className="card-title"
+                        style={{
+                          fontSize: "28px",
+                        }}
+                      >
                         <span
                           style={{
-                            textDecoration: "line-through",
                             fontSize: "13px",
-                            color: "#565959",
+                            color: "#0f1111",
+                            verticalAlign: "super",
                           }}
                         >
-                          ₹{product.MRP ? product.MRP : product.price}
+                          ₹
                         </span>
+                        {product.price}
                         <span
                           className="ms-1"
-                          style={{
-                            fontSize: "14px",
-                            color: "#0F1111",
-                          }}
+                          style={{ fontSize: "14px", color: "#565959" }}
                         >
-                          (
-                          {product.MRP
-                            ? Math.round(
-                                100 - (100 * product.price) / product.MRP
-                              )
-                            : 0}
-                          % off)
+                          MRP:{" "}
+                          <span
+                            style={{
+                              textDecoration: "line-through",
+                              fontSize: "13px",
+                              color: "#565959",
+                            }}
+                          >
+                            ₹{product.MRP ? product.MRP : product.price}
+                          </span>
+                          <span
+                            className="ms-1"
+                            style={{
+                              fontSize: "14px",
+                              color: "#0F1111",
+                            }}
+                          >
+                            (
+                            {product.MRP
+                              ? Math.round(
+                                  100 - (100 * product.price) / product.MRP
+                                )
+                              : 0}
+                            % off)
+                          </span>
                         </span>
-                      </span>
-                    </h6>
+                      </h6>
 
-                    <button
-                      className="btn btn-info mt-2"
-                      style={{
-                        minWidth: "50%",
-                        borderRadius: "16px 0px 0px 16px",
-                      }}
-                    >
-                      More details
-                    </button>
-                    <button
-                      className="btn btn-warning mt-2"
-                      style={{
-                        minWidth: "50%",
-                        borderRadius: "0px 16px 16px 0px",
-                      }}
-                    >
-                      Add to cart
-                    </button>
+                      <button
+                        className="btn btn-info mt-2"
+                        style={{
+                          minWidth: "50%",
+                          borderRadius: "16px 0px 0px 16px",
+                        }}
+                      >
+                        More details
+                      </button>
+                      <button
+                        className="btn btn-warning mt-2"
+                        style={{
+                          minWidth: "50%",
+                          borderRadius: "0px 16px 16px 0px",
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))
             ) : (
               <h4 className="text-center text-secondary mt-5">

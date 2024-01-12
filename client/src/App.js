@@ -19,12 +19,14 @@ import Orders from "./Pages/User/Orders.js";
 import Products from "./Pages/Admin/Products.js";
 import UpdateProduct from "./Pages/Admin/UpdateProduct.js";
 import Search from "./Pages/Search.js";
+import ProductDetails from "./Pages/ProductDetails.js";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/search" element={<Search />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

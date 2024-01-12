@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Layout from "../Components/Layouts/Layout.js";
 import contactImage from "../images/contact.png";
 
@@ -11,7 +11,8 @@ const Contact = () => {
           <div className="contact-details">
             <h2>Contact Details:</h2>
             <p>
-              Feel free to reach out to us for any inquiries or assistance. We're here to help!
+              Feel free to reach out to us for any inquiries or assistance.
+              We're here to help!
             </p>
             <p>
               <strong>Email:</strong> example@example.com
@@ -22,9 +23,9 @@ const Contact = () => {
             <p>
               <strong>Address:</strong> 123 Main Street, City, Country
             </p>
-           
           </div>
         </div>
+       
       </div>
     </Layout>
   );
