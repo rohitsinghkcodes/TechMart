@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layouts/Layout.js";
-import { json, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { CiHeart } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
@@ -16,6 +16,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [product, setProduct] = useState([]);
+  const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
     if (params?.slug) getSingleProduct();
@@ -29,8 +30,24 @@ const ProductDetails = () => {
         `/api/v1/products/get-single-product/${params?.slug}`
       );
       if (data?.success) {
-        console.log(data?.product);
         setProduct(data?.product);
+        //fetching all similar products
+        getSimilarProducts(data?.product._id, data?.product.category._id);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Something went wrong while getting single product!");
+    }
+  };
+
+  //* GET SIMILAR PRODUCTS
+  const getSimilarProducts = async (pid, cid) => {
+    try {
+      const { data } = await axios.get(
+        `/api/v1/products/similar-products/${pid}/${cid}`
+      );
+      if (data?.success) {
+        setSimilarProducts(data?.products);
       }
     } catch (err) {
       console.log(err);
@@ -279,6 +296,61 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+        <br/>
+        <hr/>
+        <h2 className="mt-4 m-2">Similar products</h2>
+        {similarProducts.length<1 && <p className="ms-2 text-">No Similar Product Found</p>}
+        <div className="d-flex flex-wrap m-2">
+          {similarProducts?.map((product) => (
+            <Link
+              key={product._id}
+              to={`/product/${product.slug}`}
+              className="product-link"
+            >
+              <div
+                className="card m-2 product-card2"
+                style={{ width: "15rem" }}
+              >
+                <img
+                  src={`/api/v1/products/product-image/${product._id}`}
+                  className="product-img"
+                  alt={product.name}
+                />
+                <div className="card-body">
+                  <h6 className="card-title" style={{ fontSize: "14px" }}>
+                    <b>Price:</b> ₹{product.price} &ensp;&ensp; <b>MRP:</b> ₹
+                    {product.MRP}
+                  </h6>
+                  <h6
+                    className="card-title"
+                    style={{
+                      overflow: "hidden",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 1,
+                      WebkitBoxOrient: "vertical",
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {product.name}
+                  </h6>
+                  <p
+                    className="card-text"
+                    style={{
+                      overflow: "hidden",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      fontSize: "14px",
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
+                    {product.description}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </Layout>

@@ -284,6 +284,37 @@ export const searchProductController = async (req, res) => {
   }
 };
 
+//* SIMILAR PRODUCTS CONTROLLER || GET
+export const similarProductController = async (req, res) => {
+  try {
+    const { pid, cid } = req.params;
+    const products = await productModel
+      .find({ category: cid, _id: { $ne: pid } })
+      .select("-image")
+      .limit(3)
+      .populate("category");
+
+    if (products) {
+      res.status(200).send({
+        success: true,
+        msg: "SIMILAR PRODUCTS FETCHED SUCCESSFULLY!",
+        products,
+      });
+    } else {
+      res
+        .status(400)
+        .send({ success: false, msg: "Similar Products Not Found", err });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error While Fetching Similar Product!",
+      err,
+    });
+  }
+};
+
 // // New controller for fetching search suggestions
 // export const searchProductSuggestionsController = async (req, res) => {
 //   try {
