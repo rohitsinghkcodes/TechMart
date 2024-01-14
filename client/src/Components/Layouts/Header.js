@@ -2,10 +2,12 @@ import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/authContext.js";
 import SearchComponent from "../Form/SearchComponent.js";
+import useCategory from "../../hooks/useCategory.js";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const location = useLocation();
+  const categories = useCategory();
   //clear storage and set auth details after logging out => handled by this funtion
   const handleLogOut = () => {
     setAuth({
@@ -53,11 +55,34 @@ const Header = () => {
             </div>
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink to="/categories" className="nav-link" href="#">
+              {/* CATEGORIES DROPDOWN STARTS HERE */}
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to={"/categories"}
+                  data-bs-toggle="dropdown"
+                >
                   Categories
-                </NavLink>
+                </Link>
+
+                <ul className="dropdown-menu">
+                  {categories?.map((c) => (
+                    <li>
+                      <Link to={`/categories`} className="dropdown-item">
+                        All Categories
+                      </Link>
+                      <Link
+                        to={`/category/${c.slug}`}
+                        className="dropdown-item"
+                        key={c._id}
+                      >
+                        {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
+              {/* CATEGORIES DROPDOWN ENDS HERE */}
 
               {!auth.user ? (
                 <>
