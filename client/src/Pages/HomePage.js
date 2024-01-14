@@ -249,7 +249,18 @@ const HomePage = () => {
                         </span>
                       </h6>
 
+                      <div className="text-center rounded-5">
                       <button
+                        className="btn btn-warning rounded-5 mt-2  "
+                        style={{
+                          minWidth: "95%",
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+
+                      {/* <button
                         className="btn btn-info mt-2"
                         style={{
                           minWidth: "50%",
@@ -266,7 +277,7 @@ const HomePage = () => {
                         }}
                       >
                         Add to cart
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </Link>

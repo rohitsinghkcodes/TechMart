@@ -1,6 +1,7 @@
 import slugify from "slugify";
 import fs from "fs";
 import productModel from "../models/productModel.js";
+import categoryModel from "../models/categoryModel.js";
 
 //* CREATE NEW PRODUCT CONTROLLER || POST
 export const createProductController = async (req, res) => {
@@ -310,6 +311,35 @@ export const similarProductController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error While Fetching Similar Product!",
+      err,
+    });
+  }
+};
+
+//* CATEGORY PRODUCTS CONTROLLER || GET
+export const categoryProductController = async (req, res) => {
+  try {
+    const category = await categoryModel.findOne({ slug: req.params.slug });
+
+    const products = await productModel.find({ category }).populate("category");
+
+    if (products) {
+      res.status(200).send({
+        success: true,
+        msg: "PRODUCTS FETCHED SUCCESSFULLY!",
+        category,
+        products,
+      });
+    } else {
+      res
+        .status(400)
+        .send({ success: false, msg: "Similar Products Not Found", err });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error While Fetching Products!",
       err,
     });
   }
