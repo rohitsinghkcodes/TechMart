@@ -121,7 +121,7 @@ const Search = () => {
                           "cart",
                           JSON.stringify([...cart, product])
                         );
-                        alert("Item added to cart");
+                        toast.success("Item added to cart");
                       }}
                     >
                       Add to cart

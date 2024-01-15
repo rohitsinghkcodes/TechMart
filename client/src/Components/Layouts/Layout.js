@@ -2,11 +2,12 @@ import React from "react";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
 import { Helmet } from "react-helmet";
-import { Toaster } from 'react-hot-toast';
 
 const Layout = (props) => {
   return (
+    
     <div>
+      
       <Helmet>
         <meta charSet="utf-8" />
         <meta name="description" content={props.description} />
@@ -18,8 +19,8 @@ const Layout = (props) => {
 
       <main className="main-style" style={{ minHeight: "100vh" }}>
         {props.children}
-        <Toaster />
-        </main>
+        
+      </main>
 
       <Footer />
     </div>

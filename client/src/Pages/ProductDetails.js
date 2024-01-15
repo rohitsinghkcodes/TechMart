@@ -12,6 +12,8 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { MdOutlineAssignmentReturn } from "react-icons/md";
 import { MdSecurity } from "react-icons/md";
 import { useCart } from "../Context/cartContext.js";
+import { toast } from "react-toastify";
+
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ const ProductDetails = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong while getting single product!");
+      toast.error("Something went wrong while getting single product!");
     }
   };
 
@@ -53,7 +55,7 @@ const ProductDetails = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong while getting single product!");
+      toast.error("Something went wrong while getting single product!");
     }
   };
 
@@ -293,7 +295,7 @@ const ProductDetails = () => {
                         "cart",
                         JSON.stringify([...cart, product])
                       );
-                      alert("Item added to cart");
+                      toast.success("Item added to cart");
                     }}
                   >
                     <TiShoppingCart

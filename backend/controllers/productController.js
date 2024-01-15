@@ -44,7 +44,7 @@ export const createProductController = async (req, res) => {
 
     res.status(201).send({
       success: true,
-      msg: "NEW PRODUCT CREATED SUCCESSFULLY",
+      msg: "New Product Created",
       newProduct,
     });
   } catch (err) {
@@ -67,7 +67,7 @@ export const getProductsController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      msg: "ALL PRODUCTS FETCHED SUCCESSFULLY!",
+      msg: "All Products Fetched Successfully!",
       products_count: products.length,
       products,
     });
@@ -89,7 +89,7 @@ export const getSingleProductController = async (req, res) => {
     if (product) {
       res.status(200).send({
         success: true,
-        msg: "PRODUCT FETCHED SUCCESSFULLY!",
+        msg: "Product Fetched Successfully!",
         product,
       });
     } else {
@@ -130,7 +130,7 @@ export const deleteProductController = async (req, res) => {
       .select("-image");
     res.status(200).send({
       success: true,
-      msg: "PRODUCT DELETED SUCCESSFULLY!",
+      msg: "Products Deleted Successfully!",
       deletedProduct,
     });
   } catch (err) {
@@ -183,7 +183,7 @@ export const updateProductController = async (req, res) => {
 
     res.status(201).send({
       success: true,
-      msg: "PRODUCT DETAILS UPDATED SUCCESSFULLY",
+      msg: "Products Details Updated Successfully!",
       product,
     });
   } catch (err) {
@@ -204,7 +204,7 @@ export const filterProductController = async (req, res) => {
     const products = await productModel.find(args);
     res.status(200).send({
       success: true,
-      msg: "PRODUCTS FILTERED SUCCESSFULLY!",
+      msg: "Products Filtered Successfully!",
       products,
     });
   } catch (err) {
@@ -222,7 +222,7 @@ export const productCountController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      msg: "PRODUCTS COUNTED SUCCESSFULLY!",
+      msg: "Products Counted",
       total,
     });
   } catch (err) {
@@ -248,7 +248,7 @@ export const productListByPageController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      msg: "ALL PRODUCTS IN PAGE FETCHED SUCCESSFULLY!",
+      msg: "All Products in Page Fetched Successfully!",
       products,
     });
   } catch (err) {
@@ -298,7 +298,7 @@ export const similarProductController = async (req, res) => {
     if (products) {
       res.status(200).send({
         success: true,
-        msg: "SIMILAR PRODUCTS FETCHED SUCCESSFULLY!",
+        msg: "Similar Products Fetched Successfully!",
         products,
       });
     } else {
@@ -326,7 +326,7 @@ export const categoryProductController = async (req, res) => {
     if (products) {
       res.status(200).send({
         success: true,
-        msg: "PRODUCTS FETCHED SUCCESSFULLY!",
+        msg: "Products Fetched Successfully!",
         category,
         products,
       });

@@ -4,6 +4,7 @@ import { useCart } from "../Context/cartContext.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/authContext.js";
 import { MdOutlineDelete } from "react-icons/md";
+import {toast} from "react-toastify";
 
 const Cart = () => {
   const [cart, setCart] = useCart();
@@ -35,6 +36,7 @@ const Cart = () => {
 
   const removeCartItem = (pid) => {
     try {
+      toast.info("Item deleted from cart");
       let myCart = [...cart];
       let index = myCart.findIndex((item) => item._id === pid);
       myCart.splice(index, 1);

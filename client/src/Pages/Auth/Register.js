@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/authStyles.css";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-
+import { toast } from "react-toastify";
 
 const Register = () => {
   // hooks
@@ -13,7 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [security_ans, setSecurityAns] = useState("");
   const [phone, setPhone] = useState("");
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
@@ -26,17 +26,17 @@ const Register = () => {
 
       if (res.data.success) {
         // toast.success(res.data.msg);
-        alert(`✅ ${res.data.msg}`);
+        toast.success(`${res.data.msg}`);
 
         navigate("/login");
       } else {
         // toast.error(res.data.msg);
-        alert(`Error: ${res.data.msg}`);
+        toast.error(`${res.data.msg}`);
       }
     } catch (err) {
       console.log(err);
       // toast.error("Something went wrong!");
-      alert(`❌ Something went wrong, Please try again!`);
+      toast.error(`Something went wrong, Please try again!`);
     }
   };
 
@@ -95,19 +95,17 @@ const Register = () => {
                   <IoMdEyeOff
                     size="20px"
                     color="rgb(163, 161, 161)"
-                    style={{ justifyContent: "center", alignItems:"center"}}
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   />
                 ) : (
                   <IoMdEye
                     size="20px"
                     color="rgb(163, 161, 161)"
-                    style={{ justifyContent: "center",alignItems:"center"}}
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   />
                 )}
               </span>
             </div>
-
-
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPhone" className="form-label">

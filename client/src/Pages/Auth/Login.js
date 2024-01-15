@@ -5,6 +5,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../../styles/authStyles.css";
 import { useAuth } from "../../Context/authContext.js";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const Login = () => {
   // hooks
@@ -25,7 +26,7 @@ const Login = () => {
       });
 
       if (res.data.success) {
-        alert(`✅ ${res.data.msg}`);
+        toast.success(`${res.data.msg}`);
 
         // before navigating, add user data to auth
         setAuth({
@@ -40,11 +41,11 @@ const Login = () => {
         // navigate to homepage
         navigate(location.state || "/");
       } else {
-        alert(`Error: ${res.data.msg}`);
+        toast.error(`${res.data.msg}`);
       }
     } catch (err) {
       console.log(err);
-      alert(`Something went wrong, Please try again!`);
+      toast.error(`Something went wrong, Please try again!`);
     }
   };
 
@@ -91,13 +92,13 @@ const Login = () => {
                   <IoMdEyeOff
                     size="20px"
                     color="rgb(163, 161, 161)"
-                    style={{ justifyContent: "center", alignItems:"center"}}
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   />
                 ) : (
                   <IoMdEye
                     size="20px"
                     color="rgb(163, 161, 161)"
-                    style={{ justifyContent: "center",alignItems:"center"}}
+                    style={{ justifyContent: "center", alignItems: "center" }}
                   />
                 )}
               </span>

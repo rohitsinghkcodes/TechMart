@@ -47,14 +47,14 @@ export const registerController = async (req, res) => {
 
     res.status(201).send({
       success: true,
-      msg: "USER REGISTERED SUCCESSFULLY",
+      msg: "New User Registered",
       user,
     });
   } catch (err) {
     console.log(err);
     res.status(500).send({
       success: false,
-      msg: "Error in registration",
+      msg: "Error in Registration",
       err,
     });
   }
@@ -78,7 +78,7 @@ export const loginController = async (req, res) => {
     if (!user) {
       return res.status(404).send({
         success: false,
-        msg: "Email is not registered, please sign up!",
+        msg: "Email is not registered, Please sign-up!",
       });
     }
 
@@ -89,7 +89,7 @@ export const loginController = async (req, res) => {
     if (!matchPass) {
       return res.status(400).send({
         success: false,
-        msg: "Invalid password",
+        msg: "Invalid Password",
       });
     }
 
@@ -99,7 +99,7 @@ export const loginController = async (req, res) => {
     });
     return res.status(200).send({
       success: true,
-      msg: "USER SIGNED IN SUCCESSFULLY",
+      msg: "User Signed In",
       user: {
         _id: user._id,
         name: user.name,
@@ -113,7 +113,7 @@ export const loginController = async (req, res) => {
     console.log(err);
     res.status(500).send({
       success: false,
-      msg: "Error in login",
+      msg: "Error in Sign In",
       err,
     });
   }

@@ -4,7 +4,9 @@ import AdminMenu from "../../Components/Layouts/AdminMenu";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 const { Option } = Select;
+
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ const UpdateProduct = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong while getting single product!");
+      toast.error("Something went wrong while getting single product!");
     }
   };
 
@@ -56,7 +58,7 @@ const UpdateProduct = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong in getting categories!");
+      toast.error("Something went wrong in getting categories!");
     }
   };
 
@@ -83,14 +85,14 @@ const UpdateProduct = () => {
         productData
       );
       if (data?.success) {
-        alert(`✅ ${data?.msg}`);
+        toast.success(`${data?.msg}`);
         navigate("/dashboard/admin/products");
       } else {
-        alert(`❌ ${data?.msg}`);
+        toast.error(`${data?.msg}`);
       }
     } catch (err) {
       console.log(err);
-      alert("Something Went Wrong In Updating THe Product!");
+      toast.error("Something Went Wrong In Updating THe Product!");
     }
   };
 
@@ -106,14 +108,14 @@ const UpdateProduct = () => {
         `/api/v1/products/delete-product/${id}`
       );
       if (data?.success) {
-        alert(`✅ ${data?.msg}`);
+        toast.success(`${data?.msg}`);
         navigate("/dashboard/admin/products");
       } else {
-        alert(`❌ ${data?.msg}`);
+        toast.error(`${data?.msg}`);
       }
     } catch (err) {
       console.log(err);
-      alert("Something Went Wrong In Deleting The Product!");
+      toast.error("Something Went Wrong In Deleting The Product!");
     }
   };
 

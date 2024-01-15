@@ -6,6 +6,8 @@ import useCategory from "../../hooks/useCategory.js";
 import { useCart } from "../../Context/cartContext.js";
 import { Avatar, Badge, Space } from "antd";
 import { BsCart3 } from "react-icons/bs";
+// import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -22,7 +24,7 @@ const Header = () => {
 
     //clearing the local storage
     localStorage.removeItem("auth");
-    alert("📤 SIGNED OUT SUCCESSFULLY!");
+    toast.success("SIGNED OUT SUCCESSFULLY!");
   };
 
   // Handle th ereload if already on homepage and clicked on the navbar brand

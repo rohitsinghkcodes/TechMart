@@ -5,7 +5,8 @@ import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/cartContext.js";
-import { Spin } from 'antd';
+import { Spin } from "antd";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -47,7 +48,7 @@ const HomePage = () => {
     } catch (err) {
       console.log(err);
       setIsLoading(false);
-      alert("Something went wrong in getting products!");
+      toast.error("Something went wrong in getting products!");
     }
   };
   useEffect(() => {
@@ -84,7 +85,7 @@ const HomePage = () => {
     } catch (err) {
       console.log(err);
       setIsLoading(false);
-      alert("Something went wrong in loading more products!");
+      toast.error("Something went wrong in loading more products!");
     }
   };
 
@@ -117,13 +118,14 @@ const HomePage = () => {
 
   //*CLEAR ALL FILTERS
   const clearAllFilters = () => {
+    toast.success("All filters are cleared");
     setRadio([]);
     setChecked([]);
   };
 
   return (
     <Layout title={"All products | Best Offers"}>
-      <div className="row  mt-3 " style={{marginLeft:"auto"}}>
+      <div className="row  mt-3 " style={{ marginLeft: "auto" }}>
         {/* ########### FILTER PART STARTS HERE ########### */}
         <div className="col-md-2 ">
           <h4 className="mt-3 ms-3 filter-title">Category</h4>
@@ -154,7 +156,10 @@ const HomePage = () => {
               </div>
             ))}
           </Radio.Group>
-          <button className="btn btn-danger px-4 m-3 rounded-4" onClick={clearAllFilters}>
+          <button
+            className="btn btn-danger px-4 m-3 rounded-4"
+            onClick={clearAllFilters}
+          >
             Clear Filters
           </button>
         </div>
@@ -169,92 +174,92 @@ const HomePage = () => {
                   className="card bg-dark m-2 product-card"
                   style={{ width: "18rem" }}
                 >
-                    <Link
-                      key={product._id}
-                      to={`/product/${product.slug}`}
-                      className="product-link"
-                    >
-                      <img
-                        src={`/api/v1/products/product-image/${product._id}`}
-                        className="product-img"
-                        style={{ height: "18rem", width:"18rem" }}
-                        alt={product.name}
-                      />
-                      <div className="card-body product-card">
-                        <h6
-                          className="card-title"
+                  <Link
+                    key={product._id}
+                    to={`/product/${product.slug}`}
+                    className="product-link"
+                  >
+                    <img
+                      src={`/api/v1/products/product-image/${product._id}`}
+                      className="product-img"
+                      style={{ height: "18rem", width: "18rem" }}
+                      alt={product.name}
+                    />
+                    <div className="card-body product-card">
+                      <h6
+                        className="card-title"
+                        style={{
+                          overflow: "hidden",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: "vertical",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {product.name}
+                      </h6>
+                      <p
+                        className="card-text"
+                        style={{
+                          overflow: "hidden",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {product.description}
+                      </p>
+                      <h6
+                        className="card-title"
+                        style={{
+                          fontSize: "28px",
+                        }}
+                      >
+                        <span
                           style={{
-                            overflow: "hidden",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 1,
-                            WebkitBoxOrient: "vertical",
-                            fontSize: "16px",
-                            fontWeight: "bold",
+                            fontSize: "13px",
+                            color: "#0f1111",
+                            verticalAlign: "super",
                           }}
                         >
-                          {product.name}
-                        </h6>
-                        <p
-                          className="card-text"
-                          style={{
-                            overflow: "hidden",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                          }}
+                          ₹
+                        </span>
+                        {product.price}
+                        <span
+                          className="ms-1"
+                          style={{ fontSize: "14px", color: "#a6a6a6" }}
                         >
-                          {product.description}
-                        </p>
-                        <h6
-                          className="card-title"
-                          style={{
-                            fontSize: "28px",
-                          }}
-                        >
+                          MRP:{" "}
                           <span
                             style={{
+                              textDecoration: "line-through",
                               fontSize: "13px",
-                              color: "#0f1111",
-                              verticalAlign: "super",
                             }}
                           >
-                            ₹
+                            ₹{product.MRP ? product.MRP : product.price}
                           </span>
-                          {product.price}
                           <span
                             className="ms-1"
-                            style={{ fontSize: "14px", color: "#a6a6a6" }}
+                            style={{
+                              fontSize: "14px",
+                              color: "#3cd200",
+                            }}
                           >
-                            MRP:{" "}
-                            <span
-                              style={{
-                                textDecoration: "line-through",
-                                fontSize: "13px",
-                              }}
-                            >
-                              ₹{product.MRP ? product.MRP : product.price}
-                            </span>
-                            <span
-                              className="ms-1"
-                              style={{
-                                fontSize: "14px",
-                                color: "#3cd200",
-                              }}
-                            >
-                              (
-                              {product.MRP
-                                ? Math.round(
-                                    100 - (100 * product.price) / product.MRP
-                                  )
-                                : 0}
-                              % off)
-                            </span>
+                            (
+                            {product.MRP
+                              ? Math.round(
+                                  100 - (100 * product.price) / product.MRP
+                                )
+                              : 0}
+                            % off)
                           </span>
-                        </h6>
-                      </div>
-                    </Link>
+                        </span>
+                      </h6>
+                    </div>
+                  </Link>
 
-                    <div className="card-body">
+                  <div className="card-body">
                     <div className="text-center ">
                       <button
                         className="btn btn-warning rounded-4 mt-2  "
@@ -267,14 +272,14 @@ const HomePage = () => {
                             "cart",
                             JSON.stringify([...cart, product])
                           );
-                          alert("Item added to cart");
+                          toast.success("Item added to cart");
                         }}
                       >
                         Add to cart
                       </button>
                     </div>
-                    </div>
                   </div>
+                </div>
               ))
             ) : (
               <h4 className="text-center text-secondary mt-5">
@@ -286,8 +291,10 @@ const HomePage = () => {
             {products &&
               products.length < total &&
               !radio.length &&
-              !checked.length && (
-                isLoading ?  <Spin size="large" /> :
+              !checked.length &&
+              (isLoading ? (
+                <Spin size="large" />
+              ) : (
                 <button
                   className="btn btn-danger rounded-4 px-4  m-5"
                   onClick={(e) => {
@@ -295,9 +302,9 @@ const HomePage = () => {
                     setPage(page + 1);
                   }}
                 >
-                  { "Load More +"}
+                  {"Load More +"}
                 </button>
-              )}
+              ))}
           </div>
         </div>
       </div>

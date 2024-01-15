@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { toast } from "react-toastify";
+
 
 const CategoryProduct = () => {
   const [products, setProducts] = useState([]);
@@ -23,7 +25,7 @@ const CategoryProduct = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong in getting products!");
+      toast.error("Something went wrong in getting products!");
     }
   };
 

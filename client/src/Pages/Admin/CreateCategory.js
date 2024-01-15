@@ -4,6 +4,8 @@ import AdminMenu from "../../Components/Layouts/AdminMenu";
 import axios from "axios";
 import CategoryForm from "../../Components/Form/CategoryForm";
 import { Modal } from "antd";
+import { toast } from "react-toastify";
+
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -19,14 +21,14 @@ const CreateCategory = () => {
         name,
       });
       if (data.success) {
-        alert(`✅ ${data.msg}`);
+        toast.success(`${data.msg}`);
         getAllCategories();
       } else {
-        alert(`❌ ${data.msg}`);
+        toast.error(`${data.msg}`);
       }
     } catch (err) {
       console.log(err);
-      alert(`❌ ${err}`);
+      toast.error(`${err}`);
     }
   };
 
@@ -39,7 +41,7 @@ const CreateCategory = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong in getting categories!");
+      toast.error("Something went wrong in getting categories!");
     }
   };
 
@@ -56,16 +58,16 @@ const CreateCategory = () => {
         { name: updatedName }
       );
       if (data.success) {
-        alert(`✅ ${data.msg}`);
+        toast.success(`${data.msg}`);
         setSelected(null);
         setUpdatedName(null);
         setVisible(false);
         getAllCategories();
       } else {
-        alert(`❌ ${data.msg}`);
+        toast.error(`${data.msg}`);
       }
     } catch (err) {
-      alert("Something went wrong while editing category!!");
+      toast.error("Something went wrong while editing category!!");
     }
   };
   //delete category
@@ -76,13 +78,13 @@ const CreateCategory = () => {
         { name: updatedName }
       );
       if (data.success) {
-        alert(`✅ ${data.msg}`);
+        toast.success(`${data.msg}`);
         getAllCategories();
       } else {
-        alert(`❌ ${data.msg}`);
+        toast.error(`${data.msg}`);
       }
     } catch (err) {
-      alert("Something went wrong while deleting category!");
+      toast.error("Something went wrong while deleting category!");
     }
   };
 

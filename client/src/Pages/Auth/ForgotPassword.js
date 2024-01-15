@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/authStyles.css";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { toast } from "react-toastify";
+
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -28,18 +30,18 @@ const ForgotPassword = () => {
       if (res.data.success) {
         // toast.success(res.data.msg);
         console.log(res.data.success);
-        alert(`✅ ${res.data.msg} ✅`);
+        toast.success(`${res.data.msg}`);
 
         //navigate to homepage
         navigate("/login");
       } else {
         // toast.error(res.data.msg);
-        alert(`❌ ${res.data.msg}`);
+        toast.error(`${res.data.msg}`);
       }
     } catch (err) {
       console.log(err);
       // toast.error("Something went wrong!");
-      alert(`🚫 Something went wrong, Please try again!`);
+      toast.error(`Something went wrong, Please try again!`);
     }
   };
 

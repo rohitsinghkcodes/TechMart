@@ -4,6 +4,7 @@ import AdminMenu from "../../Components/Layouts/AdminMenu";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const { Option } = Select;
 
 const CreateProduct = () => {
@@ -27,7 +28,7 @@ const CreateProduct = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong in getting categories!");
+      toast.error("Something went wrong in getting categories!");
     }
   };
 
@@ -41,28 +42,28 @@ const CreateProduct = () => {
 
     // Validate if all fields are filled
     if (!category) {
-      alert("CATEGORY field is empty!");
+      toast.warning("CATEGORY field is empty!");
       return;
     }
     if (!name) {
-      alert("NAME field is empty!");
+      toast.warning("NAME field is empty!");
       return;
     }
     if (!description) {
-      alert("DESCRIPTION field is empty!");
+      toast.warning("DESCRIPTION field is empty!");
       return;
     }
     if (!price) {
-      alert("PRICE field is empty!");
+      toast.warning("PRICE field is empty!");
       return;
     }
 
     if (!quantity) {
-      alert("QUANTITY field is empty!");
+      toast.warning("QUANTITY field is empty!");
       return;
     }
     if (!image) {
-      alert("PRICE field is empty!");
+      toast.warning("PRICE field is empty!");
       return;
     }
 
@@ -81,14 +82,14 @@ const CreateProduct = () => {
         productData
       );
       if (data?.success) {
-        alert(`✅ ${data?.msg}`);
+        toast.success(`${data?.msg}`);
         navigate("/dashboard/admin/products");
       } else {
-        alert(`❌ ${data?.msg}`);
+        toast.error(`${data?.msg}`);
       }
     } catch (err) {
       console.log(err);
-      alert("Something Went Wrong In Creating New Product!");
+      toast.error("Something Went Wrong In Creating New Product!");
     }
   };
 
@@ -201,7 +202,7 @@ const CreateProduct = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
-                
+
                 <div className="mb-4">
                   <label className="form-label ">Is Shipping?</label>
                   <Select
@@ -212,7 +213,7 @@ const CreateProduct = () => {
                     onChange={(value) => {
                       setShipping(value);
                     }}
-                    placeholderStyle={{ color: "white" }}  
+                    placeholderStyle={{ color: "white" }}
                   >
                     <Option value={true}>Yes</Option>
                     <Option value={false}>No</Option>
