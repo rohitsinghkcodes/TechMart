@@ -11,10 +11,12 @@ import { IoIosMedal } from "react-icons/io";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { MdOutlineAssignmentReturn } from "react-icons/md";
 import { MdSecurity } from "react-icons/md";
+import { useCart } from "../Context/cartContext.js";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const [cart, setCart] = useCart()
   const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
 
@@ -284,6 +286,10 @@ const ProductDetails = () => {
                     style={{
                       width: "45%",
                       borderRadius: "50px",
+                    }}
+                    onClick={() => {
+                      setCart([...cart, product]);
+                      alert("Item added to cart");
                     }}
                   >
                     <TiShoppingCart

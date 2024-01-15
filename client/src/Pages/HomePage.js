@@ -4,6 +4,7 @@ import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
 import { Link } from "react-router-dom";
+import { useCart } from "../Context/cartContext.js";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [cart, setCart] = useCart();
 
   //* GET ALL CATEGORIES
   const getAllCategories = async () => {
@@ -250,34 +252,21 @@ const HomePage = () => {
                       </h6>
 
                       <div className="text-center rounded-5">
-                      <button
-                        className="btn btn-warning rounded-5 mt-2  "
-                        style={{
-                          minWidth: "95%",
-                        }}
-                      >
-                        Add to cart
-                      </button>
-                    </div>
+                        <button
+                          className="btn btn-warning rounded-5 mt-2  "
+                          style={{
+                            minWidth: "95%",
+                          }}
+                          onClick={() => {
+                            setCart([...cart, product]);
+                            alert("Item added to cart");
+                          }}
+                        >
+                          Add to cart
+                        </button>
+                      </div>
 
-                      {/* <button
-                        className="btn btn-info mt-2"
-                        style={{
-                          minWidth: "50%",
-                          borderRadius: "16px 0px 0px 16px",
-                        }}
-                      >
-                        More details
-                      </button>
-                      <button
-                        className="btn btn-warning mt-2"
-                        style={{
-                          minWidth: "50%",
-                          borderRadius: "0px 16px 16px 0px",
-                        }}
-                      >
-                        Add to cart
-                      </button> */}
+                      
                     </div>
                   </div>
                 </Link>

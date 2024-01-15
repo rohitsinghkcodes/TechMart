@@ -3,9 +3,13 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/authContext.js";
 import SearchComponent from "../Form/SearchComponent.js";
 import useCategory from "../../hooks/useCategory.js";
+import { useCart } from "../../Context/cartContext.js";
+import { Avatar, Badge, Space } from "antd";
+import { BsCart3 } from "react-icons/bs";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const [cart] = useCart();
   const location = useLocation();
   const categories = useCategory();
   //clear storage and set auth details after logging out => handled by this funtion
@@ -133,8 +137,13 @@ const Header = () => {
               )}
 
               <li className="nav-item">
-                <NavLink to="/cart" className="nav-link" href="#">
-                  🛒(0)
+                <NavLink to="/cart" className="nav-link " href="#">
+                  <Space size="small">
+                    <Badge count={cart?.length} color="#a71344" showZero>
+                      <BsCart3 color="white" size="20px" />
+                      <span>&nbsp;</span>
+                    </Badge>
+                  </Space>
                 </NavLink>
               </li>
             </ul>
