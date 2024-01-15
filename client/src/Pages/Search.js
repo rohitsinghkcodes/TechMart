@@ -1,17 +1,17 @@
 import Layout from "../Components/Layouts/Layout.js";
 import React from "react";
 import { useSearch } from "../Context/searchContext";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useCart } from "../Context/cartContext.js";
 
 const Search = () => {
-  const [values, setValues] = useSearch();
-  const[cart, setCart] = useCart();
+  const [values] = useSearch();
+  const [cart, setCart] = useCart();
 
   return (
     <Layout title={"All products | Search"}>
-      <div className="row m-4 ">
-        <div className="col-md-10">
+      <div className="row m-4" >
+        <div className="col-md-12 ">
           <div style={{ color: "white", margin: "2px" }}>
             {values?.results.length < 1 ? (
               <h4 className="text-start text-secondary mt-5">
@@ -21,24 +21,24 @@ const Search = () => {
               <h5>{`Search Results: ${values?.results.length} Products Found`}</h5>
             )}
           </div>
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap " >
             {values?.results.map((product) => (
-              <Link
-                key={product._id}
-                to={`/product/${product.slug}`}
-                className="product-link"
+              <div
+                className="card m-2 bg-dark product-card  "
+                style={{ width: "17rem" }}
               >
-                <div
-                  className="card m-2 bg-dark product-card"
-                  style={{ width: "18rem" }}
+                <Link
+                  to={`/product/${product.slug}`}
+                  className="product-link"
+                  key={product._id}
                 >
                   <img
                     src={`/api/v1/products/product-image/${product._id}`}
                     className="product-img"
-                    style={{height:"18rem"}}
+                    style={{ height: "17rem", width: "17rem" }}
                     alt={product.name}
                   />
-                  <div className="card-body">
+                  <div className="card-body product-card">
                     <h6
                       className="card-title"
                       style={{
@@ -63,12 +63,7 @@ const Search = () => {
                     >
                       {product.description}
                     </p>
-                    <h6
-                      className="card-title"
-                      style={{
-                        fontSize: "28px",
-                      }}
-                    >
+                    <h6 className="card-title" style={{ fontSize: "28px" }}>
                       <span
                         style={{
                           fontSize: "13px",
@@ -110,28 +105,30 @@ const Search = () => {
                         </span>
                       </span>
                     </h6>
+                  </div>
+                </Link>
 
-                    <div className="text-center ">
-                        <button
-                          className="btn btn-warning rounded-4 mt-2  "
-                          style={{
-                            minWidth: "95%",
-                          }}
-                          onClick={() => {
-                            setCart([...cart, product]);
-                            localStorage.setItem(
-                              "cart",
-                              JSON.stringify([...cart, product])
-                            );
-                            alert("Item added to cart");
-                          }}
-                        >
-                          Add to cart
-                        </button>
-                      </div>
+                <div className="card-body">
+                  <div className="text-center">
+                    <button
+                      className="btn btn-warning rounded-4 mt-2"
+                      style={{
+                        minWidth: "95%",
+                      }}
+                      onClick={() => {
+                        setCart([...cart, product]);
+                        localStorage.setItem(
+                          "cart",
+                          JSON.stringify([...cart, product])
+                        );
+                        alert("Item added to cart");
+                      }}
+                    >
+                      Add to cart
+                    </button>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

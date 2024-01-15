@@ -5,6 +5,7 @@ import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices.js";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/cartContext.js";
+import { Spin } from 'antd';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -122,7 +123,7 @@ const HomePage = () => {
 
   return (
     <Layout title={"All products | Best Offers"}>
-      <div className="row  mt-3">
+      <div className="row  mt-3 " style={{marginLeft:"auto"}}>
         {/* ########### FILTER PART STARTS HERE ########### */}
         <div className="col-md-2 ">
           <h4 className="mt-3 ms-3 filter-title">Category</h4>
@@ -153,7 +154,7 @@ const HomePage = () => {
               </div>
             ))}
           </Radio.Group>
-          <button className="btn btn-danger m-3" onClick={clearAllFilters}>
+          <button className="btn btn-danger px-4 m-3 rounded-4" onClick={clearAllFilters}>
             Clear Filters
           </button>
         </div>
@@ -164,114 +165,116 @@ const HomePage = () => {
           <div className="d-flex flex-wrap">
             {products.length > 0 ? (
               products?.map((product) => (
-                <Link
-                  key={product._id}
-                  to={`/product/${product.slug}`}
-                  className="product-link"
+                <div
+                  className="card bg-dark m-2 product-card"
+                  style={{ width: "18rem" }}
                 >
-                  <div
-                    className="card bg-dark m-2 product-card"
-                    style={{ width: "18rem" }}
-                  >
-                    <img
-                      src={`/api/v1/products/product-image/${product._id}`}
-                      className="product-img"
-                      style={{height:"18rem"}}
-                      alt={product.name}
-                    />
-                    <div className="card-body">
-                      <h6
-                        className="card-title"
-                        style={{
-                          overflow: "hidden",
-                          display: "-webkit-box",
-                          WebkitLineClamp: 1,
-                          WebkitBoxOrient: "vertical",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {product.name}
-                      </h6>
-                      <p
-                        className="card-text"
-                        style={{
-                          overflow: "hidden",
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                        }}
-                      >
-                        {product.description}
-                      </p>
-                      <h6
-                        className="card-title"
-                        style={{
-                          fontSize: "28px",
-                        }}
-                      >
-                        <span
+                    <Link
+                      key={product._id}
+                      to={`/product/${product.slug}`}
+                      className="product-link"
+                    >
+                      <img
+                        src={`/api/v1/products/product-image/${product._id}`}
+                        className="product-img"
+                        style={{ height: "18rem", width:"18rem" }}
+                        alt={product.name}
+                      />
+                      <div className="card-body product-card">
+                        <h6
+                          className="card-title"
                           style={{
-                            fontSize: "13px",
-                            color: "#0f1111",
-                            verticalAlign: "super",
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            fontSize: "16px",
+                            fontWeight: "bold",
                           }}
                         >
-                          ₹
-                        </span>
-                        {product.price}
-                        <span
-                          className="ms-1"
-                          style={{ fontSize: "14px", color: "#a6a6a6" }}
+                          {product.name}
+                        </h6>
+                        <p
+                          className="card-text"
+                          style={{
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                          }}
                         >
-                          MRP:{" "}
+                          {product.description}
+                        </p>
+                        <h6
+                          className="card-title"
+                          style={{
+                            fontSize: "28px",
+                          }}
+                        >
                           <span
                             style={{
-                              textDecoration: "line-through",
                               fontSize: "13px",
+                              color: "#0f1111",
+                              verticalAlign: "super",
                             }}
                           >
-                            ₹{product.MRP ? product.MRP : product.price}
+                            ₹
                           </span>
+                          {product.price}
                           <span
                             className="ms-1"
-                            style={{
-                              fontSize: "14px",
-                              color: "#3cd200",
-                            }}
+                            style={{ fontSize: "14px", color: "#a6a6a6" }}
                           >
-                            (
-                            {product.MRP
-                              ? Math.round(
-                                  100 - (100 * product.price) / product.MRP
-                                )
-                              : 0}
-                            % off)
+                            MRP:{" "}
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                fontSize: "13px",
+                              }}
+                            >
+                              ₹{product.MRP ? product.MRP : product.price}
+                            </span>
+                            <span
+                              className="ms-1"
+                              style={{
+                                fontSize: "14px",
+                                color: "#3cd200",
+                              }}
+                            >
+                              (
+                              {product.MRP
+                                ? Math.round(
+                                    100 - (100 * product.price) / product.MRP
+                                  )
+                                : 0}
+                              % off)
+                            </span>
                           </span>
-                        </span>
-                      </h6>
-
-                      <div className="text-center ">
-                        <button
-                          className="btn btn-warning rounded-4 mt-2  "
-                          style={{
-                            minWidth: "95%",
-                          }}
-                          onClick={() => {
-                            setCart([...cart, product]);
-                            localStorage.setItem(
-                              "cart",
-                              JSON.stringify([...cart, product])
-                            );
-                            alert("Item added to cart");
-                          }}
-                        >
-                          Add to cart
-                        </button>
+                        </h6>
                       </div>
+                    </Link>
+
+                    <div className="card-body">
+                    <div className="text-center ">
+                      <button
+                        className="btn btn-warning rounded-4 mt-2  "
+                        style={{
+                          minWidth: "95%",
+                        }}
+                        onClick={() => {
+                          setCart([...cart, product]);
+                          localStorage.setItem(
+                            "cart",
+                            JSON.stringify([...cart, product])
+                          );
+                          alert("Item added to cart");
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
                     </div>
                   </div>
-                </Link>
               ))
             ) : (
               <h4 className="text-center text-secondary mt-5">
@@ -284,14 +287,15 @@ const HomePage = () => {
               products.length < total &&
               !radio.length &&
               !checked.length && (
+                isLoading ?  <Spin size="large" /> :
                 <button
-                  className="btn btn-info rounded-4 p-2 m-5"
+                  className="btn btn-danger rounded-4 px-4  m-5"
                   onClick={(e) => {
                     e.preventDefault();
                     setPage(page + 1);
                   }}
                 >
-                  {isLoading ? "Loading..." : "Load More⬇️"}
+                  { "Load More +"}
                 </button>
               )}
           </div>
