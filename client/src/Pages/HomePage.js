@@ -125,7 +125,7 @@ const HomePage = () => {
 
   return (
     <Layout title={"All products | Best Offers"}>
-      <div className="row  mt-3 " style={{ marginLeft: "auto" }}>
+      <div className="row  mt-3 ">
         {/* ########### FILTER PART STARTS HERE ########### */}
         <div className="col-md-2 ">
           <h4 className="mt-3 ms-3 filter-title">Category</h4>
