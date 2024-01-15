@@ -180,6 +180,16 @@ const CreateProduct = () => {
                   />
                 </div>
                 <div className="mb-4">
+                  <label className="form-label text-light">Product MRP</label>
+                  <input
+                    type="number"
+                    value={MRP}
+                    placeholder="Enter the MRP for this product"
+                    className="bg-dark form-control input-field"
+                    onChange={(e) => setMRP(e.target.value)}
+                  />
+                </div>
+                <div className="mb-4">
                   <label className="form-label text-light">
                     Product Quantity
                   </label>
@@ -191,16 +201,7 @@ const CreateProduct = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
-                <div className="mb-4">
-                  <label className="form-label text-light">Product MRP</label>
-                  <input
-                    type="number"
-                    value={MRP}
-                    placeholder="Enter the MRP for this product"
-                    className="bg-dark form-control input-field"
-                    onChange={(e) => setMRP(e.target.value)}
-                  />
-                </div>
+                
                 <div className="mb-4">
                   <label className="form-label ">Is Shipping?</label>
                   <Select

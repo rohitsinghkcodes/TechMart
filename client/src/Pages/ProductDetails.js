@@ -16,7 +16,7 @@ import { useCart } from "../Context/cartContext.js";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const [cart, setCart] = useCart()
+  const [cart, setCart] = useCart();
   const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
 
@@ -289,6 +289,10 @@ const ProductDetails = () => {
                     }}
                     onClick={() => {
                       setCart([...cart, product]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, product])
+                      );
                       alert("Item added to cart");
                     }}
                   >
@@ -303,10 +307,12 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <br/>
-        <hr/>
+        <br />
+        <hr />
         <h2 className="mt-4 m-2">Similar products</h2>
-        {similarProducts.length<1 && <p className="ms-2 text-">No Similar Product Found</p>}
+        {similarProducts.length < 1 && (
+          <p className="ms-2 text-">No Similar Product Found</p>
+        )}
         <div className="d-flex flex-wrap m-2">
           {similarProducts?.map((product) => (
             <Link

@@ -259,14 +259,16 @@ const HomePage = () => {
                           }}
                           onClick={() => {
                             setCart([...cart, product]);
+                            localStorage.setItem(
+                              "cart",
+                              JSON.stringify([...cart, product])
+                            );
                             alert("Item added to cart");
                           }}
                         >
                           Add to cart
                         </button>
                       </div>
-
-                      
                     </div>
                   </div>
                 </Link>

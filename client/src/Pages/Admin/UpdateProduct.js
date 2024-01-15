@@ -119,7 +119,7 @@ const UpdateProduct = () => {
 
   return (
     <Layout title={"Dashboard - Products"}>
-      <div className="container-fluid m-3 p-3" >
+      <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
@@ -218,6 +218,16 @@ const UpdateProduct = () => {
                   />
                 </div>
                 <div className="mb-4">
+                  <label className="form-label text-light">Product MRP</label>
+                  <input
+                    type="number"
+                    value={MRP}
+                    placeholder="Enter the MRP for this product"
+                    className="form-control bg-dark form-control input-field"
+                    onChange={(e) => setMRP(e.target.value)}
+                  />
+                </div>
+                <div className="mb-4">
                   <label className="form-label text-light">
                     Product Quantity
                   </label>
@@ -230,16 +240,7 @@ const UpdateProduct = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
-                <div className="mb-4">
-                  <label className="form-label text-light">Product MRP</label>
-                  <input
-                    type="number"
-                    value={MRP}
-                    placeholder="Enter the MRP for this product"
-                    className="form-control bg-dark form-control input-field"
-                    onChange={(e) => setMRP(e.target.value)}
-                  />
-                </div>
+
                 <div className="mb-4">
                   <label className="form-label text-light">Is Shipping?</label>
 

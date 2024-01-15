@@ -10,12 +10,36 @@ const Cart = () => {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
 
+  const totalCartPrice = () => {
+    try {
+      let total = 0;
+      cart?.map((i) => {
+        total = total + i.price;
+      });
+      return total;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const totalCartMRP = () => {
+    try {
+      let total = 0;
+      cart?.map((i) => {
+        total = total + i.MRP;
+      });
+      return total;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const removeCartItem = (pid) => {
     try {
       let myCart = [...cart];
       let index = myCart.findIndex((item) => item._id === pid);
       myCart.splice(index, 1);
       setCart(myCart);
+      localStorage.setItem("cart", JSON.stringify(myCart));
     } catch (err) {
       console.log(err);
     }
@@ -25,79 +49,139 @@ const Cart = () => {
       <div className="container ">
         <div className="row">
           <div className="col-md-12">
-            <h1 className=" p-2">
-              {`Hello ${auth?.token && auth?.user?.name}`}
+            <h1 className=" mt-2">
+              {`Hello, ${auth?.token && auth?.user?.name}`}
             </h1>
-            <h4>
+            <h5>
               {cart?.length >= 1
                 ? `You have ${cart?.length} items in your cart. ${
                     auth?.token ? "" : "Please sign in to checkout"
                   }`
                 : "Your cart is empty"}
-            </h4>
+            </h5>
           </div>
-          <div className="row">
-            <div className="col-md-9">
+          <div className="row mt-2">
+            <div className="col-md-8">
               {cart?.map((product) => (
-                <div className="card m-2  rounded-5 bg-dark text-light flex-row ">
-                  <div className="row ">
-                    <div className="col-md-4">
-                      <img
-                        src={`/api/v1/products/product-image/${product?._id}`}
-                        className="rounded-5 img-fluid"
-                        style={{ width: "150px" }}
-                        alt={product.name}
-                      />
-                    </div>
-                    <div className="col-md-8">
-                      <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
-                        <h6
-                          className="card-title"
+                <div className="card row m-2  rounded-5 bg-dark text-light flex-row ">
+                  <div className="col-md-2 py-3 d-flex justify-content-end">
+                    <img
+                      src={`/api/v1/products/product-image/${product?._id}`}
+                      className="rounded-5 img-fluid text-center"
+                      alt={product.name}
+                    />
+                  </div>
+                  <div className="col-md-8">
+                    <div className="card-body">
+                      <h5 className="card-title">{product.name}</h5>
+                      <h6
+                        className="card-title"
+                        style={{
+                          fontSize: "28px",
+                        }}
+                      >
+                        <span
                           style={{
-                            fontSize: "28px",
+                            fontSize: "13px",
+                            color: "#a9a9a9",
+                            verticalAlign: "super",
                           }}
                         >
+                          ₹
+                        </span>
+                        {product.price}
+                        <span
+                          className="ms-1"
+                          style={{ fontSize: "14px", color: "#a9a9a9" }}
+                        >
+                          MRP:{" "}
                           <span
                             style={{
+                              textDecoration: "line-through",
                               fontSize: "13px",
                               color: "#a9a9a9",
-                              verticalAlign: "super",
                             }}
                           >
-                            ₹
+                            ₹{product.MRP ? product.MRP : product.price}
                           </span>
-                          {product.price}
-                          <span
-                            className="ms-1"
-                            style={{ fontSize: "14px", color: "#a9a9a9" }}
-                          >
-                            MRP:{" "}
-                            <span
-                              style={{
-                                textDecoration: "line-through",
-                                fontSize: "13px",
-                                color: "#a9a9a9",
-                              }}
-                            >
-                              ₹{product.MRP ? product.MRP : product.price}
-                            </span>
-                          </span>
-                        </h6>
-                        <button
-                          className="btn btn-danger mt-4 p-2 px-4 text-center d-flex justify-content-center rounded-5"
-                          onClick={() => removeCartItem(product._id)}
+                        </span>
+                        <span
+                          className="ms-1"
+                          style={{
+                            fontSize: "14px",
+                            color: "#3cd200",
+                          }}
                         >
-                          <MdOutlineDelete size="25px" />
-                          Remove item
-                        </button>
-                      </div>
+                          (
+                          {product.MRP
+                            ? Math.round(
+                                100 - (100 * product.price) / product.MRP
+                              )
+                            : 0}
+                          % off)
+                        </span>
+                      </h6>
+                    </div>
+                  </div>
+                  <div className="col-md-2">
+                    <div
+                      className="btn mt-4  px-4 d-flex justify-content-end"
+                      onClick={() => removeCartItem(product._id)}
+                    >
+                      <MdOutlineDelete color="white" size="25px" />
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="col-md-3">Checkout | Payment</div>
+            <div className="col-md-4">
+              <div className="card row rounded-4 bg-dark text-light flex-row ">
+                <div className="text-center p-3">
+                  <h3>Cart Summary</h3>
+                  <div className="my-2">
+                    <hr />
+                  </div>
+                  <div
+                    className="d-flex"
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <p>
+                      Price ({cart.length} {cart.length > 1 ? "items" : "item"}
+                      ):
+                    </p>
+                    <p>₹{totalCartMRP()}</p>
+                  </div>
+                  <div
+                    className="d-flex"
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <p>Discount:</p>
+                    <p style={{ color: "#3cd200" }}>
+                      - ₹{totalCartMRP() - totalCartPrice()}
+                    </p>
+                  </div>
+                  <div
+                    className="d-flex"
+                    style={{
+                      justifyContent: "space-between",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <p>Total Amount:</p>
+                    <p>₹{totalCartPrice()}</p>
+                  </div>
+                  <div className="my-2">
+                    <hr />
+                    <button
+                      className="btn btn-danger rounded-5"
+                      style={{ width: "80%" }}
+                    >
+                      Place Order
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
