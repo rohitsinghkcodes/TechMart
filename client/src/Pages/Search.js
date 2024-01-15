@@ -3,6 +3,8 @@ import React from "react";
 import { useSearch } from "../Context/searchContext";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/cartContext.js";
+import { toast } from "react-toastify";
+
 
 const Search = () => {
   const [values] = useSearch();
