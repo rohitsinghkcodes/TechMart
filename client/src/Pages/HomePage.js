@@ -170,12 +170,13 @@ const HomePage = () => {
                   className="product-link"
                 >
                   <div
-                    className="card m-2 product-card"
+                    className="card bg-dark m-2 product-card"
                     style={{ width: "18rem" }}
                   >
                     <img
                       src={`/api/v1/products/product-image/${product._id}`}
                       className="product-img"
+                      style={{height:"18rem"}}
                       alt={product.name}
                     />
                     <div className="card-body">
@@ -221,14 +222,13 @@ const HomePage = () => {
                         {product.price}
                         <span
                           className="ms-1"
-                          style={{ fontSize: "14px", color: "#565959" }}
+                          style={{ fontSize: "14px", color: "#a6a6a6" }}
                         >
                           MRP:{" "}
                           <span
                             style={{
                               textDecoration: "line-through",
                               fontSize: "13px",
-                              color: "#565959",
                             }}
                           >
                             ₹{product.MRP ? product.MRP : product.price}
@@ -237,7 +237,7 @@ const HomePage = () => {
                             className="ms-1"
                             style={{
                               fontSize: "14px",
-                              color: "#0F1111",
+                              color: "#3cd200",
                             }}
                           >
                             (
@@ -251,9 +251,9 @@ const HomePage = () => {
                         </span>
                       </h6>
 
-                      <div className="text-center rounded-5">
+                      <div className="text-center ">
                         <button
-                          className="btn btn-warning rounded-5 mt-2  "
+                          className="btn btn-warning rounded-4 mt-2  "
                           style={{
                             minWidth: "95%",
                           }}

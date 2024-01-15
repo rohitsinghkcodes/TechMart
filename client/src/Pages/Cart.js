@@ -64,7 +64,7 @@ const Cart = () => {
             <div className="col-md-8">
               {cart?.map((product) => (
                 <div className="card row m-2  rounded-5 bg-dark text-light flex-row ">
-                  <div className="col-md-2 py-3 d-flex justify-content-end">
+                  <div className="col-md-2 py-2 d-flex justify-content-end">
                     <img
                       src={`/api/v1/products/product-image/${product?._id}`}
                       className="rounded-5 img-fluid text-center"
@@ -72,7 +72,7 @@ const Cart = () => {
                     />
                   </div>
                   <div className="col-md-8">
-                    <div className="card-body">
+                    <div className="card-body product-card">
                       <h5 className="card-title">{product.name}</h5>
                       <h6
                         className="card-title"
@@ -99,7 +99,7 @@ const Cart = () => {
                             style={{
                               textDecoration: "line-through",
                               fontSize: "13px",
-                              color: "#a9a9a9",
+                              color: "#a6a6a6",
                             }}
                           >
                             ₹{product.MRP ? product.MRP : product.price}
@@ -109,7 +109,7 @@ const Cart = () => {
                           className="ms-1"
                           style={{
                             fontSize: "14px",
-                            color: "#3cd200",
+                            color: "#3cd200a6",
                           }}
                         >
                           (
@@ -160,6 +160,8 @@ const Cart = () => {
                       - ₹{totalCartMRP() - totalCartPrice()}
                     </p>
                   </div>
+                  <hr className="mt-0" />
+
                   <div
                     className="d-flex"
                     style={{
@@ -170,7 +172,7 @@ const Cart = () => {
                     <p>Total Amount:</p>
                     <p>₹{totalCartPrice()}</p>
                   </div>
-                  <div className="my-2">
+                  <div>
                     <hr />
                     <button
                       className="btn btn-danger rounded-5"

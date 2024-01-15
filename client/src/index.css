@@ -210,21 +210,16 @@ CONTACT PAGE CSS
 }
 
 /* PRODUCT CARD CSS */
-.product-card2 {
-  background-image: linear-gradient(#ffffff 75%, #e46274 100%);
-  box-shadow: none;
-  border: none;
-  border-radius: 20px;
-}
 .product-card {
-  background-image: linear-gradient(#ffffff 60%, #c13a4c 100%);
   box-shadow: none;
   border: none;
   border-radius: 20px;
+  color: #ffffffda;
 }
 
 .product-img {
-  border-radius: 20px 20px 0 0;
+  border-radius: 30px ;
+  padding: 20px;
 }
 
 /* FILTERS CSS */
@@ -265,7 +260,8 @@ CONTACT PAGE CSS
 .set-categ {
   color: white !important;
 }
-
 .set-categ {
-  color: #3cd200 !important;
+  color: #3cd20088;
 }
+
+

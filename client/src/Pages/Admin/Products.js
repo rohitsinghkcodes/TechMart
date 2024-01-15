@@ -45,12 +45,13 @@ const Products = () => {
                     className="product-link"
                   >
                     <div
-                      className="card m-2 product-card2"
+                      className="card m-2 bg-dark product-card"
                       style={{ width: "15rem" }}
                     >
                       <img
                         src={`/api/v1/products/product-image/${product._id}`}
                         className="product-img"
+                        style={{height:"15rem"}}
                         alt={product.name}
                       />
                       <div className="card-body">
