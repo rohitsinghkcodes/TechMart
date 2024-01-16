@@ -9,6 +9,8 @@ import { SearchProvider } from "./Context/searchContext";
 import { CartProvider } from "./Context/cartContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,6 +30,11 @@ root.render(
             pauseOnHover={false}
             theme="dark"
           />
+          <Tooltip
+            id="my-tooltip"
+            style={{ backgroundColor: "black", color: "white" , borderRadius: "6px"}}
+          />
+
           <App />
         </BrowserRouter>
       </CartProvider>

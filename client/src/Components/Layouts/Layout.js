@@ -5,9 +5,7 @@ import { Helmet } from "react-helmet";
 
 const Layout = (props) => {
   return (
-    
     <div>
-      
       <Helmet>
         <meta charSet="utf-8" />
         <meta name="description" content={props.description} />
@@ -18,8 +16,8 @@ const Layout = (props) => {
       <Header />
 
       <main className="main-style" style={{ minHeight: "100vh" }}>
-        {props.children}
         
+        {props.children}
       </main>
 
       <Footer />

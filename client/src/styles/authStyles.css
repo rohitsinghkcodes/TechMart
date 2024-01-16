@@ -29,6 +29,14 @@
   border-radius: 5px;
   margin-bottom: 15px;
 }
+.input-field2 {
+  background-color: black;
+  border: 0;
+  color: #c5c5c562 !important;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
 
 .input-field::placeholder {
   color: #999999c4 !important; /* Set the desired color */
