@@ -217,6 +217,10 @@ CONTACT PAGE CSS
   color: #ffffffda;
 }
 
+.card h1{
+ color: wheat;
+}
+
 .product-img {
   border-radius: 30px ;
   padding: 20px;

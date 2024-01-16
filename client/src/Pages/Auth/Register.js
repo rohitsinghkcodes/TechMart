@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 
 const Register = () => {
   // hooks
+  const [security_ans, setSecurityAns] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [security_ans, setSecurityAns] = useState("");
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();

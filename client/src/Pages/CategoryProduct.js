@@ -47,7 +47,7 @@ const CategoryProduct = () => {
                 className="product-link"
               >
                 <div
-                  className="card m-2 product-card"
+                  className="card m-2 bg-dark product-card"
                   style={{ width: "18rem" }}
                 >
                   <img
@@ -55,7 +55,7 @@ const CategoryProduct = () => {
                     className="product-img"
                     alt={product.name}
                   />
-                  <div className="card-body">
+                  <div className="card-body product-card">
                     <h6
                       className="card-title"
                       style={{

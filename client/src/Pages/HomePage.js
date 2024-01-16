@@ -118,7 +118,7 @@ const HomePage = () => {
 
   //*CLEAR ALL FILTERS
   const clearAllFilters = () => {
-    toast.success("All filters are cleared");
+    toast.info("All filters are cleared");
     setRadio([]);
     setChecked([]);
   };

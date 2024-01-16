@@ -99,7 +99,7 @@ export const loginController = async (req, res) => {
     });
     return res.status(200).send({
       success: true,
-      msg: "User Signed In",
+      msg: "Signed In Successfully!",
       user: {
         _id: user._id,
         name: user.name,
@@ -151,6 +151,54 @@ export const forgotPasswordController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Something went wrong!",
+      err,
+    });
+  }
+};
+
+//* UPDATE PROFILE CONTROLLER || POST
+export const updateProfileController = async (req, res) => {
+  try {
+    const { name, email, password, phone } = req.body;
+
+    if (!name) {
+      res.send({ error: "name is required!" });
+    }
+    if (!email) {
+      res.send({ error: "email is required!" });
+    }
+    if (!password) {
+      res.send({ error: "password is required!" });
+    }
+    if (!phone) {
+      res.send({ error: "name is required!" });
+    }
+
+    const user = await userModel.findById(req.user._id);
+
+    //hashing the password
+    const hashedPassword = await hashPassword(password);
+    // update password
+    const updatedUser = await userModel.findByIdAndUpdate(
+      req.user._id,
+      {
+        name: name || user.name,
+        password: hashedPassword || user.password,
+        phone: phone || user.phone,
+      },
+      { new: true }
+    );
+
+    res.status(200).send({
+      success: true,
+      msg: "User Profle Updated Successfully!",
+      updatedUser,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error in Registration",
       err,
     });
   }

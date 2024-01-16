@@ -24,7 +24,7 @@ const Header = () => {
 
     //clearing the local storage
     localStorage.removeItem("auth");
-    toast.success("SIGNED OUT SUCCESSFULLY!");
+    toast.success("Signed Out Successfully!");
   };
 
   // Handle th ereload if already on homepage and clicked on the navbar brand
