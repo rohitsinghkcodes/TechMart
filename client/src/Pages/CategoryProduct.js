@@ -53,6 +53,7 @@ const CategoryProduct = () => {
                   <img
                     src={`/api/v1/products/product-image/${product._id}`}
                     className="product-img"
+                    style={{ height: "18rem", width: "18rem" }}
                     alt={product.name}
                   />
                   <div className="card-body product-card">
@@ -89,7 +90,7 @@ const CategoryProduct = () => {
                       <span
                         style={{
                           fontSize: "13px",
-                          color: "#0f1111",
+                          color: "#a6a6a6",
                           verticalAlign: "super",
                         }}
                       >
@@ -98,14 +99,14 @@ const CategoryProduct = () => {
                       {product.price}
                       <span
                         className="ms-1"
-                        style={{ fontSize: "14px", color: "#565959" }}
+                        style={{ fontSize: "14px", color: "#a6a6a6" }}
                       >
                         MRP:{" "}
                         <span
                           style={{
                             textDecoration: "line-through",
                             fontSize: "13px",
-                            color: "#565959",
+                            color: "#a6a6a6",
                           }}
                         >
                           ₹{product.MRP ? product.MRP : product.price}
@@ -114,7 +115,7 @@ const CategoryProduct = () => {
                           className="ms-1"
                           style={{
                             fontSize: "14px",
-                            color: "#0F1111",
+                            color: "#3cd200",
                           }}
                         >
                           (
@@ -130,7 +131,7 @@ const CategoryProduct = () => {
 
                     <div className="text-center rounded-5">
                       <button
-                        className="btn btn-warning rounded-5 mt-2  "
+                        className="btn btn-warning rounded-5  "
                         style={{
                           minWidth: "95%",
                         }}

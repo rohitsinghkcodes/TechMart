@@ -236,7 +236,7 @@ export const productCountController = async (req, res) => {
 //* PRODUCTS LIST BY PAGE CONTROLLER || GET
 export const productListByPageController = async (req, res) => {
   try {
-    const perPage = 4;
+    const perPage = 8;
     const page = req.params.page ? req.params.page : 1;
 
     const products = await productModel

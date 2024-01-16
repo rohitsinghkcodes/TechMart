@@ -219,7 +219,7 @@ const HomePage = () => {
                         <span
                           style={{
                             fontSize: "13px",
-                            color: "#0f1111",
+                            color: "#a6a6a6",
                             verticalAlign: "super",
                           }}
                         >
@@ -259,10 +259,10 @@ const HomePage = () => {
                     </div>
                   </Link>
 
-                  <div className="card-body">
+                  <div className="card-body pt-0">
                     <div className="text-center ">
                       <button
-                        className="btn btn-warning rounded-4 mt-2  "
+                        className="btn btn-warning rounded-4  "
                         style={{
                           minWidth: "95%",
                         }}
