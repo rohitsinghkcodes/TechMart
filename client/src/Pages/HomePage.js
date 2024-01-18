@@ -123,6 +123,14 @@ const HomePage = () => {
     setChecked([]);
   };
 
+  //*custom toast
+  const CustomToast = ({ message }) => (
+    <div className="d-flex justify-content-around">
+      <span>{message}</span>
+      <a href="/cart">view</a>
+    </div>
+  );
+
   return (
     <Layout title={"All products | Best Offers"}>
       <div className="row  mt-3 ">
@@ -272,7 +280,12 @@ const HomePage = () => {
                             "cart",
                             JSON.stringify([...cart, product])
                           );
-                          toast.success("Item added to cart");
+                          toast.success(
+                            <CustomToast message="Item added to cart!" />,
+                            {
+                              autoClose: 3000, // Adjust as needed
+                            }
+                          );
                         }}
                       >
                         Add to cart

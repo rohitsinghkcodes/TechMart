@@ -13,20 +13,25 @@ const Profile = () => {
   //state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("********");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [editName, setEditName] = useState(false);
   const [editPhone, setEditPhone] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
+  const [editAddress, setEditAddress] = useState(false);
 
   // get user data
   useEffect(() => {
-    const { name, email, password, phone } = auth?.user;
+    console.log("#############");
+    console.log(auth.user);
+    const { name, email, password, phone, address } = auth?.user;
     setName(name);
     setEmail(email);
     setPassword(password);
     setPhone(phone);
+    setAddress(address);
   }, [auth?.user]);
 
   // on submit form
@@ -35,10 +40,12 @@ const Profile = () => {
     try {
       const { data } = await axios.put(
         "http://localhost:8080/api/v1/auth//update-profile",
-        { name, email, password, phone }
+        { name, email, password, phone, address }
       );
 
       if (data?.success) {
+        console.log("#############");
+        console.log(auth);
         setAuth({ ...auth, user: data?.updatedUser });
         //update local storage
         let ls = localStorage.getItem("auth");
@@ -62,7 +69,7 @@ const Profile = () => {
 
   return (
     <Layout title={"Dashboard - Profile"}>
-      <div className=" container-fluid  p-3">
+      <div className="container container-fluid  p-3">
         <div className="row">
           <div className="col-md-3">
             <UserMenu />
@@ -172,6 +179,37 @@ const Profile = () => {
                     </span>
                   </div>
                 </div>
+
+                <div className="mb-2">
+                  <label htmlFor="exampleInputName" className="form-label ms-2">
+                    Address
+                    <span
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Edit"
+                      data-tooltip-place="right"
+                    >
+                      &ensp; &ensp;
+                      <MdEdit
+                        className="justify-content-space-between"
+                        onClick={() => setEditAddress(true)}
+                      />
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    className={
+                      !editAddress
+                        ? " bg-dark form-control input-field2"
+                        : "bg-dark form-control input-field"
+                    }
+                    id="exampleInputName"
+                    placeholder="Enter your address"
+                    disabled={!editAddress}
+                  />
+                </div>
+
                 <div className="mb-3">
                   <label
                     htmlFor="exampleInputPhone"
@@ -205,7 +243,9 @@ const Profile = () => {
                 <button
                   type="submit"
                   className="btn btn-danger rounded-4 px-2 mt-2"
-                  disabled={!(editName || editPassword || editPhone)}
+                  disabled={
+                    !(editName || editPassword || editPhone || editAddress)
+                  }
                 >
                   Update Profile
                 </button>

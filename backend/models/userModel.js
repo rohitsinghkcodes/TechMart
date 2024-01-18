@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      default: "empty",
+    },
     security_ans: {
       type: String,
       required: true,

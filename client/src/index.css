@@ -217,12 +217,12 @@ CONTACT PAGE CSS
   color: #ffffffda;
 }
 
-.card h1{
- color: wheat;
+.card h1 {
+  color: wheat;
 }
 
 .product-img {
-  border-radius: 30px ;
+  border-radius: 30px;
   padding: 20px;
 }
 
@@ -268,4 +268,21 @@ CONTACT PAGE CSS
   color: #3cd20088;
 }
 
+/* Dashboard Card  */
+/* .active2 {
+  background-color: #6d1e38 !important;
+  border: none;
+}
 
+/* .list-group-item {
+  border: none;
+} */
+/* .list-group {
+  background-color: #ffffff2f;
+} */
+/* .list-group-item-action:hover {
+  background-color: #6d1e38;
+}
+.active{
+  background-color: #7e7d7d2f;
+} */

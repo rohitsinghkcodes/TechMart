@@ -4,7 +4,7 @@ import { useCart } from "../Context/cartContext.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/authContext.js";
 import { MdOutlineDelete } from "react-icons/md";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const [cart, setCart] = useCart();
@@ -127,10 +127,16 @@ const Cart = () => {
                   </div>
                   <div className="col-md-2">
                     <div
-                      className="btn mt-4  px-4 d-flex justify-content-end"
+                      className="mt-4  px-4 d-flex justify-content-end"
                       onClick={() => removeCartItem(product._id)}
                     >
-                      <MdOutlineDelete color="white" size="25px" />
+                      <MdOutlineDelete
+                        color="red"
+                        size="25px"
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Remove"
+                        data-tooltip-place="top"
+                      />
                     </div>
                   </div>
                 </div>

@@ -105,6 +105,7 @@ export const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        address: user.address,
         role: user.role,
       },
       token,
@@ -159,16 +160,13 @@ export const forgotPasswordController = async (req, res) => {
 //* UPDATE PROFILE CONTROLLER || POST
 export const updateProfileController = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, address } = req.body;
 
     if (!name) {
       res.send({ error: "name is required!" });
     }
     if (!email) {
       res.send({ error: "email is required!" });
-    }
-    if (!password) {
-      res.send({ error: "password is required!" });
     }
     if (!phone) {
       res.send({ error: "name is required!" });
@@ -185,8 +183,9 @@ export const updateProfileController = async (req, res) => {
         name: name || user.name,
         password: hashedPassword || user.password,
         phone: phone || user.phone,
+        address: address || "",
       },
-      { new: true }
+      { new: true, select: "-password" }
     );
 
     res.status(200).send({
@@ -198,7 +197,7 @@ export const updateProfileController = async (req, res) => {
     console.log(err);
     res.status(500).send({
       success: false,
-      msg: "Error in Registration",
+      msg: "Error in Updating User Profile",
       err,
     });
   }

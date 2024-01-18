@@ -62,16 +62,16 @@ const Header = () => {
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               {/* CATEGORIES DROPDOWN STARTS HERE */}
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown mx-2 ">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle "
                   to={"/categories"}
                   data-bs-toggle="dropdown"
                 >
                   Categories
                 </Link>
 
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-menu-lg-end">
                   <li>
                     <Link to={`/categories`} className="dropdown-item">
                       All Categories
@@ -81,7 +81,7 @@ const Header = () => {
                     <li>
                       <Link
                         to={`/category/${c.slug}`}
-                        className="dropdown-item"
+                        className="dropdown-item "
                         key={c._id}
                       >
                         {c.name}
@@ -102,7 +102,7 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <li className="nav-item dropdown">
+                  <li className="nav-item dropdown mx-2">
                     <NavLink
                       className="nav-link dropdown-toggle"
                       href="#"
@@ -115,7 +115,7 @@ const Header = () => {
                         auth.user.name.slice(1)}
                     </NavLink>
                     {/* Dropdown menu */}
-                    <ul className="dropdown-menu">
+                    <ul className="dropdown-menu dropdown-menu-lg-end">
                       <li>
                         <NavLink
                           to={`/dashboard/${
@@ -125,6 +125,7 @@ const Header = () => {
                         >
                           Dashboard
                         </NavLink>
+
                         <NavLink
                           to="/login"
                           onClick={handleLogOut}
@@ -138,11 +139,11 @@ const Header = () => {
                 </>
               )}
 
-              <li className="nav-item">
+              <li className="nav-item mx-2">
                 <NavLink to="/cart" className="nav-link " href="#">
                   <Space size="small">
                     <Badge count={cart?.length} color="#a71344" showZero>
-                      <BsCart3 color="white" size="20px" />
+                      <BsCart3 color="white" size="25px" />
                       <span>&nbsp;</span>
                     </Badge>
                   </Space>
