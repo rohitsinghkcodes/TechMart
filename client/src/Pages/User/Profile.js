@@ -4,7 +4,7 @@ import UserMenu from "../../Components/Layouts/UserMenu";
 import { useAuth } from "../../Context/authContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { IoMdEye, IoMdEyeOff, IoMdClose } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
 
 const Profile = () => {
@@ -14,6 +14,7 @@ const Profile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("********");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -24,8 +25,6 @@ const Profile = () => {
 
   // get user data
   useEffect(() => {
-    console.log("#############");
-    console.log(auth.user);
     const { name, email, password, phone, address } = auth?.user;
     setName(name);
     setEmail(email);
@@ -38,14 +37,21 @@ const Profile = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
+      if (editPassword) {
+        if (!(password === confirmPassword)) {
+          toast.error(" Password fields do not match!");
+          return;
+        }
+      }
+
       const { data } = await axios.put(
         "http://localhost:8080/api/v1/auth//update-profile",
         { name, email, password, phone, address }
       );
 
       if (data?.success) {
-        console.log("#############");
-        console.log(auth);
+        setPassword("********");
+        setConfirmPassword("");
         setAuth({ ...auth, user: data?.updatedUser });
         //update local storage
         let ls = localStorage.getItem("auth");
@@ -124,6 +130,7 @@ const Profile = () => {
                     disabled
                   />
                 </div>
+                {/* Password Field */}
                 <div className="mb-2">
                   <label
                     htmlFor="exampleInputPassword"
@@ -179,6 +186,35 @@ const Profile = () => {
                     </span>
                   </div>
                 </div>
+                {/* Confirm Password Field */}
+                {editPassword && (
+                  <div className="mb-2">
+                    <label
+                      htmlFor="exampleInputPassword"
+                      className="form-label ms-2"
+                    >
+                      Confirm Password
+                      <span
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Close"
+                        data-tooltip-place="right"
+                      >
+                        &ensp; &ensp;
+                        <IoMdClose onClick={() => setEditPassword(false)} />
+                      </span>
+                    </label>
+                    <div className="password-input-wrapper">
+                      <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="bg-dark form-control input-field"
+                        id="exampleInputPassword"
+                        placeholder="Enter your password again"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <div className="mb-2">
                   <label htmlFor="exampleInputName" className="form-label ms-2">

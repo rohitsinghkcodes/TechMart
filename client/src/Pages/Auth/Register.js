@@ -12,6 +12,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -19,6 +20,11 @@ const Register = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
+      if (!(password === confirmPassword)) {
+        toast.error(" Password fields do not match!");
+        return;
+      }
+
       const res = await axios.post(
         "http://localhost:8080/api/v1/auth/register/",
         { name, email, password, phone, security_ans }
@@ -73,6 +79,7 @@ const Register = () => {
               placeholder="Enter your email"
             />
           </div>
+          {/* Password Field */}
           <div className="mb-2">
             <label htmlFor="exampleInputPassword" className="form-label">
               Password
@@ -105,6 +112,23 @@ const Register = () => {
                   />
                 )}
               </span>
+            </div>
+          </div>
+          {/* Confirm password field */}
+          <div className="mb-2">
+            <label htmlFor="exampleInputPassword" className="form-label">
+              Confirm Password
+            </label>
+            <div className="password-input-wrapper">
+              <input
+                required
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="bg-dark form-control input-field"
+                id="exampleInputPassword"
+                placeholder="Enter your password"
+              />
             </div>
           </div>
           <div className="mb-3">
