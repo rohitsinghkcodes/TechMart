@@ -51,7 +51,7 @@ const Cart = () => {
       <div className="container ">
         <div className="row">
           <div className="col-md-12">
-            <h1 className=" mt-2">
+            <h1 className=" mt-4">
               {`Hello, ${auth?.token && auth?.user?.name}`}
             </h1>
             <h5>
@@ -65,7 +65,10 @@ const Cart = () => {
           <div className="row mt-2">
             <div className="col-md-8">
               {cart?.map((product) => (
-                <div className="card row m-2  rounded-5 bg-dark text-light flex-row ">
+                <div
+                  className="card row m-2  rounded-5 bg-dark text-light flex-row "
+                  key={product._id}
+                >
                   <div className="col-md-2 py-2 d-flex justify-content-end">
                     <img
                       src={`/api/v1/products/product-image/${product?._id}`}

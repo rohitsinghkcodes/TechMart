@@ -181,9 +181,9 @@ const HomePage = () => {
                 <div
                   className="card bg-dark m-2 product-card"
                   style={{ width: "18rem" }}
+                  key={product._id}
                 >
                   <Link
-                    key={product._id}
                     to={`/product/${product.slug}`}
                     className="product-link"
                   >

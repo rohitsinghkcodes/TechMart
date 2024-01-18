@@ -28,11 +28,11 @@ const Search = () => {
               <div
                 className="card m-2 bg-dark product-card  "
                 style={{ width: "17rem" }}
+                key={product._id}
               >
                 <Link
                   to={`/product/${product.slug}`}
                   className="product-link"
-                  key={product._id}
                 >
                   <img
                     src={`/api/v1/products/product-image/${product._id}`}
