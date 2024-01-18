@@ -157,7 +157,7 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-//* UPDATE PROFILE CONTROLLER || POST
+//* UPDATE PROFILE CONTROLLER || PUT
 export const updateProfileController = async (req, res) => {
   try {
     const { name, email, password, phone, address } = req.body;
@@ -198,6 +198,41 @@ export const updateProfileController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error in Updating User Profile",
+      err,
+    });
+  }
+};
+
+//* UPDATE Address CONTROLLER || PUT
+export const updateAddressController = async (req, res) => {
+  try {
+    const { address } = req.body;
+
+    if (!address) {
+      res.send({ error: "address is required!" });
+    }
+
+    const user = await userModel.findById(req.user._id);
+
+    // update password
+    const updatedUser = await userModel.findByIdAndUpdate(
+      req.user._id,
+      {
+        address: address || "",
+      },
+      { new: true, select: "-password" }
+    );
+
+    res.status(200).send({
+      success: true,
+      msg: "Address Updated Successfully!",
+      updatedUser,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error in Updating Address",
       err,
     });
   }

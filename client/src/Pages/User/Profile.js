@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { IoMdEye, IoMdEyeOff, IoMdClose } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
+import { PinList } from "../../Helpers/PinList";
 
 const Profile = () => {
   //context
@@ -17,11 +18,14 @@ const Profile = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [pin, setPin] = useState("");
+  const [addLine, setAddLine] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [editName, setEditName] = useState(false);
   const [editPhone, setEditPhone] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [editAddress, setEditAddress] = useState(false);
+  const [editAddress2, setEditAddress2] = useState(false);
 
   // get user data
   useEffect(() => {
@@ -31,6 +35,8 @@ const Profile = () => {
     setPassword(password);
     setPhone(phone);
     setAddress(address);
+    setAddLine(address.substring(0, address.length - 13));
+    setPin(address.substring(address.length - 6));
   }, [auth?.user]);
 
   // on submit form
@@ -58,10 +64,15 @@ const Profile = () => {
         ls = JSON.parse(ls);
         ls.user = data?.updatedUser;
         localStorage.setItem("auth", JSON.stringify(ls));
-        toast.success(`${data?.msg}`);
+        toast.success(`${data?.msg}`, {
+          style: {
+            width: "350px", // Set the desired width
+          },
+        });
         setEditName(false);
         setEditPassword(false);
         setEditPhone(false);
+        setEditAddress2(false);
       } else {
         // toast.error(res.data.msg);
         toast.error(`${data?.msg}`);
@@ -73,6 +84,27 @@ const Profile = () => {
     }
   };
 
+  // check pin availability
+  const availableDelivery = () => {
+    if (!PinList.includes(pin)) {
+      toast.error(
+        `Sorry, We do not deliver at ${pin}!\nCheck your Pincode again!`,
+        {
+          style: {
+            width: "350px", // Set the desired width
+          },
+        }
+      );
+      return;
+    }
+
+    setAddress(`${addLine}\n PIN: ${pin}`);
+    setEditAddress(false);
+    toast.info("Plase click update profile to confirm changes.", {
+      autoClose: 2000,
+    });
+  };
+
   return (
     <Layout title={"Dashboard - Profile"}>
       <div className="container container-fluid  p-3">
@@ -81,6 +113,12 @@ const Profile = () => {
             <UserMenu />
           </div>
           <div className="col-md-9">
+            {(editName || editPassword || editPhone || editAddress2) && (
+              <div className="alert alert-warning py-2" role="alert">
+                💡 Changes made in profile details, Please click on "Update
+                Profile" to confirm changes!
+              </div>
+            )}
             <div className="card bg-dark d-flex rounded-5 p-5 ">
               <form onSubmit={onSubmitHandler}>
                 <h1 className="mb-5 text-center">User Profile</h1>
@@ -215,7 +253,7 @@ const Profile = () => {
                     </div>
                   </div>
                 )}
-
+                {/* ADDRESS ANNDEDDDIADDRESS */}
                 <div className="mb-2">
                   <label htmlFor="exampleInputName" className="form-label ms-2">
                     Address
@@ -227,23 +265,81 @@ const Profile = () => {
                       &ensp; &ensp;
                       <MdEdit
                         className="justify-content-space-between"
-                        onClick={() => setEditAddress(true)}
+                        onClick={() => {
+                          setEditAddress(true);
+                          setEditAddress2(true);
+                        }}
                       />
                     </span>
                   </label>
-                  <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className={
-                      !editAddress
-                        ? " bg-dark form-control input-field2"
-                        : "bg-dark form-control input-field"
-                    }
-                    id="exampleInputName"
-                    placeholder="Enter your address"
-                    disabled={!editAddress}
-                  />
+
+                  {editAddress ? (
+                    <div className="card rounded-4 pt-2 px-4 bg-dark mt-1">
+                      <div className="row ">
+                        <div className="col-md-2 text-light m-0">
+                          <p6 className="ms-3">Line 1</p6>
+                        </div>
+                        <div className="col-md-10 m-0">
+                          <textarea
+                            type="text"
+                            value={addLine}
+                            onChange={(e) => setAddLine(e.target.value)}
+                            className={
+                              !editAddress
+                                ? " bg-dark form-control input-field2"
+                                : "bg-dark form-control input-field"
+                            }
+                            id="exampleInputName"
+                            placeholder="Enter your address"
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-2 text-light m-0">
+                          <p2 className="ms-3">PIN</p2>
+                        </div>
+                        <div className="col-6 m-0">
+                          <input
+                            type="text"
+                            value={pin}
+                            onChange={(e) => setPin(e.target.value)}
+                            className={
+                              !editAddress
+                                ? " bg-dark form-control input-field2"
+                                : "bg-dark form-control input-field"
+                            }
+                            id="exampleInputName"
+                            placeholder="enter pincode"
+                            disabled={!editAddress}
+                          />
+                        </div>
+                        <div className="col-4  ">
+                          <div
+                            onClick={availableDelivery}
+                            className="btn btn-sm btn-warning rounded-2 border-0 px-3"
+                          >
+                            Set Address
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <textarea
+                        type="text"
+                        value={address}
+                        className={
+                          !editAddress
+                            ? " bg-dark form-control input-field2"
+                            : "bg-dark form-control input-field"
+                        }
+                        id="exampleInputName"
+                        style={{ height: "6rem" }}
+                        placeholder="Enter your address"
+                        disabled
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-3">
@@ -278,9 +374,9 @@ const Profile = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-danger rounded-4 px-2 mt-2"
+                  className="btn btn-danger btn-sm rounded-3 px-3 mt-2"
                   disabled={
-                    !(editName || editPassword || editPhone || editAddress)
+                    !(editName || editPassword || editPhone || editAddress2)
                   }
                 >
                   Update Profile

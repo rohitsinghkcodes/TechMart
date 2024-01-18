@@ -20,7 +20,7 @@ root.render(
         <BrowserRouter>
           <ToastContainer
             position="top-center"
-            autoClose={1000}
+            autoClose={1500}
             hideProgressBar
             newestOnTop
             closeOnClick
@@ -29,10 +29,15 @@ root.render(
             draggable
             pauseOnHover={false}
             theme="dark"
+            width="350px"
           />
           <Tooltip
             id="my-tooltip"
-            style={{ backgroundColor: "black", color: "white" , borderRadius: "6px"}}
+            style={{
+              backgroundColor: "black",
+              color: "white",
+              borderRadius: "6px",
+            }}
           />
 
           <App />
