@@ -1,14 +1,14 @@
 import React from "react";
 import Layout from "../Components/Layouts/Layout.js";
 import { useCart } from "../Context/cartContext.js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/authContext.js";
 import { MdOutlineDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Cart = () => {
   const [cart, setCart] = useCart();
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const navigate = useNavigate();
 
   const totalCartPrice = () => {
@@ -51,9 +51,6 @@ const Cart = () => {
       <div className="container ">
         <div className="row">
           <div className="col-md-12">
-            <h1 className=" mt-4">
-              {`Hello, ${auth?.token && auth?.user?.name}`}
-            </h1>
             <h5>
               {cart?.length >= 1
                 ? `You have ${cart?.length} items in your cart. ${
@@ -62,8 +59,41 @@ const Cart = () => {
                 : "Your cart is empty"}
             </h5>
           </div>
+
           <div className="row mt-2">
             <div className="col-md-8">
+              <div className="col-12">
+                <div className="card bg-dark text-light rounded-5">
+                  {auth?.user && auth.user.address && (
+                    <>
+                      <div className="row px-4 py-3">
+                        <div className="col-9">
+                          <div className="row">
+                            <h5 style={{ color: "gray" }}>
+                              Deliver to:{" "}
+                              <span style={{ color: "#ffffffde" }}>
+                                {auth?.user?.name}
+                              </span>
+                            </h5>
+
+                            <p6 style={{ color: "#ffffffbe" }}>
+                              {auth?.user?.address}
+                            </p6>
+                          </div>
+                        </div>
+                        <div className="col-3 d-flex justify-content-end my-auto ">
+                          <button
+                            className="btn btn-sm btn-outline-warning p-2 rounded-3"
+                            onClick={() => navigate("/dashboard/user/profile")}
+                          >
+                            Update Address
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
               {cart?.map((product) => (
                 <div
                   className="card row m-2  rounded-5 bg-dark text-light flex-row "
@@ -183,15 +213,24 @@ const Cart = () => {
                     <p>Total Amount:</p>
                     <p>₹{totalCartPrice()}</p>
                   </div>
-                  <div>
-                    <hr />
+                  {auth?.user && auth.user.address ? (
+                    <div>
+                      <hr />
+                      <button
+                        className="btn btn-danger rounded-5"
+                        style={{ width: "80%" }}
+                      >
+                        Place Order
+                      </button>
+                    </div>
+                  ) : (
                     <button
-                      className="btn btn-danger rounded-5"
-                      style={{ width: "80%" }}
+                      className="btn btn-outline-warning"
+                      onClick={() => navigate("/login", { state: "/cart" })}
                     >
-                      Place Order
+                      Please Login to checkout
                     </button>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
