@@ -4,7 +4,7 @@ import { useAuth } from "../../Context/authContext.js";
 import SearchComponent from "../Form/SearchComponent.js";
 import useCategory from "../../hooks/useCategory.js";
 import { useCart } from "../../Context/cartContext.js";
-import { Avatar, Badge, Space } from "antd";
+import {  Badge, Space } from "antd";
 import { BsCart3 } from "react-icons/bs";
 // import toast from "react-hot-toast";
 import { toast } from "react-toastify";

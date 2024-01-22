@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import Layout from "../Components/Layouts/Layout.js";
 import { useCart } from "../Context/cartContext.js";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,12 @@ const Cart = () => {
   const [cart, setCart] = useCart();
   const [auth] = useAuth();
   const navigate = useNavigate();
+  // State for unique products
+  const [uniqueProducts, setUniqueProducts] = useState([]);
+  useEffect(() => {
+    // Update unique products whenever cart changes
+    setUniqueProducts(getUniqueProducts());
+  }, [cart]);
 
   const totalCartPrice = () => {
     try {
@@ -36,7 +42,8 @@ const Cart = () => {
   };
 
   const getUniqueProducts = () => {
-    const uniqueProducts = cart.reduce((acc, product) => {
+    // Function to get unique products with quantities
+    return cart.reduce((acc, product) => {
       const existingProductIndex = acc.findIndex((p) => p._id === product._id);
 
       if (existingProductIndex !== -1) {
@@ -47,8 +54,27 @@ const Cart = () => {
 
       return acc;
     }, []);
+  };
 
-    return uniqueProducts;
+  const updateQuantity = (productId, newQuantity) => {
+    // Update quantity in unique products
+    const updatedUniqueProducts = uniqueProducts.map((product) =>
+      product._id === productId
+        ? { ...product, quantity: newQuantity }
+        : product
+    );
+
+    setUniqueProducts(updatedUniqueProducts);
+
+    // Update cart state with the modified unique products
+    const updatedCart = updatedUniqueProducts.reduce((cartArray, product) => {
+      const productInstances = Array.from({ length: product.quantity }, () => ({
+        ...product,
+      }));
+      return [...cartArray, ...productInstances];
+    }, []);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const removeCartItem = (pid) => {
@@ -63,6 +89,11 @@ const Cart = () => {
       console.log(err);
     }
   };
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+
   return (
     <Layout title="Contact | E-Commerce App">
       <div className="container ">
@@ -93,9 +124,9 @@ const Cart = () => {
                               </span>
                             </h5>
 
-                            <p6 style={{ color: "#ffffffbe" }}>
+                            <p style={{ color: "#ffffffbe" }}>
                               {auth?.user?.address}
-                            </p6>
+                            </p>
                           </div>
                         </div>
                         <div className="col-3 d-flex justify-content-end my-auto ">
@@ -179,8 +210,11 @@ const Cart = () => {
                           defaultValue={1}
                           value={product.quantity}
                           style={{ width: 50 }}
+                          onChange={(value) =>
+                            updateQuantity(product._id, value)
+                          }
                           options={[
-                            { value: 1, label: 1 },
+                            { value: "1", label: "1" },
                             { value: 2, label: 2 },
                             { value: 3, label: 3 },
                             { value: 4, label: 4 },
