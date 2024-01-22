@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/authContext.js";
 import { MdOutlineDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import { Select, Space } from "antd";
 
 const Cart = () => {
   const [cart, setCart] = useCart();
@@ -14,8 +15,8 @@ const Cart = () => {
   const totalCartPrice = () => {
     try {
       let total = 0;
-      cart?.map((i) => {
-        total = total + i.price;
+      getUniqueProducts().forEach((product) => {
+        total += product.price * product.quantity;
       });
       return total;
     } catch (err) {
@@ -25,13 +26,29 @@ const Cart = () => {
   const totalCartMRP = () => {
     try {
       let total = 0;
-      cart?.map((i) => {
-        total = total + i.MRP;
+      getUniqueProducts().forEach((product) => {
+        total += product.MRP * product.quantity;
       });
       return total;
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const getUniqueProducts = () => {
+    const uniqueProducts = cart.reduce((acc, product) => {
+      const existingProductIndex = acc.findIndex((p) => p._id === product._id);
+
+      if (existingProductIndex !== -1) {
+        acc[existingProductIndex].quantity += 1;
+      } else {
+        acc.push({ ...product, quantity: 1 });
+      }
+
+      return acc;
+    }, []);
+
+    return uniqueProducts;
   };
 
   const removeCartItem = (pid) => {
@@ -94,7 +111,7 @@ const Cart = () => {
                   )}
                 </div>
               </div>
-              {cart?.map((product) => (
+              {getUniqueProducts()?.map((product) => (
                 <div
                   className="card row m-2  rounded-5 bg-dark text-light flex-row "
                   key={product._id}
@@ -156,6 +173,20 @@ const Cart = () => {
                           % off)
                         </span>
                       </h6>
+                      Qty:
+                      <Space wrap>
+                        <Select
+                          defaultValue={1}
+                          value={product.quantity}
+                          style={{ width: 50 }}
+                          options={[
+                            { value: 1, label: 1 },
+                            { value: 2, label: 2 },
+                            { value: 3, label: 3 },
+                            { value: 4, label: 4 },
+                          ]}
+                        />
+                      </Space>
                     </div>
                   </div>
                   <div className="col-md-2">

@@ -73,7 +73,7 @@ const Header = () => {
 
                 <ul className="dropdown-menu dropdown-menu-lg-end">
                   <li>
-                    <Link to={`/categories`} className="dropdown-item">
+                    <Link to={`/categories`} className="dropdown-item" style={{color:"wheat"}}>
                       All Categories
                     </Link>
                   </li>

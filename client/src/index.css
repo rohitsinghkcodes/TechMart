@@ -269,3 +269,15 @@ CONTACT PAGE CSS
 }
 
 
+/* Category Section Tiles */
+.category-tiles{
+  color: white;
+  background-color: #0000005b;
+  align-items: center;
+  border: none;
+  text-decoration: none;
+}
+.category-tiles:hover{
+  background-color: #19191967;
+}
+
