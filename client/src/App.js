@@ -23,6 +23,7 @@ import ProductDetails from "./Pages/ProductDetails.js";
 import Categories from "./Pages/Categories.js";
 import CategoryProduct from "./Pages/CategoryProduct.js";
 import Cart from "./Pages/Cart.js";
+import Payment from "./Pages/Payment.js";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/search" element={<Search />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/category/:slug" element={<CategoryProduct />} />

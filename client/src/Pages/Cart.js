@@ -1,11 +1,13 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layouts/Layout.js";
 import { useCart } from "../Context/cartContext.js";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/authContext.js";
 import { MdOutlineDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import DropIn from "braintree-web-drop-in-react";
 import { Select, Space } from "antd";
+import axios from "axios";
 
 const Cart = () => {
   const [cart, setCart] = useCart();
@@ -13,6 +15,10 @@ const Cart = () => {
   const navigate = useNavigate();
   // State for unique products
   const [uniqueProducts, setUniqueProducts] = useState([]);
+  const [instance, setInstance] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState("");
+
   useEffect(() => {
     // Update unique products whenever cart changes
     setUniqueProducts(getUniqueProducts());
@@ -90,8 +96,39 @@ const Cart = () => {
     }
   };
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  //PAYMENT GATEWAY
+  const getToken = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/products/braintree/token");
+
+      setToken(data?.clientToken);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  //MAKE PAYMENT
+  const handlePayment = async () => {
+    try {
+      setLoading(true);
+      const { nonce } = await instance.requestPaymentMethod();
+      const { data } = await axios.post("/api/v1/products/braintree/payment", {
+        nonce,
+        cart,
+      });
+
+      localStorage.removeItem("cart");
+      setCart([]);
+      navigate("/dashboard/user/orders");
+      toast.success("Payment Successful");
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
   };
 
   return (
@@ -214,7 +251,7 @@ const Cart = () => {
                             updateQuantity(product._id, value)
                           }
                           options={[
-                            { value: "1", label: "1" },
+                            { value: 1, label: 1 },
                             { value: 2, label: 2 },
                             { value: 3, label: 3 },
                             { value: 4, label: 4 },
@@ -296,6 +333,39 @@ const Cart = () => {
                       Please Login to checkout
                     </button>
                   )}
+                  <div className="card bg-dark rounded-3 mt-2 text-light">
+                    {!token || !cart?.length ? (
+                      ""
+                    ) : (
+                      <>
+                        <DropIn
+                          options={{
+                            authorization: token,
+                            googlePay: {
+                              flow: "checkout",
+                              // Add additional Google Pay options if needed
+                            },
+                            paypal: {
+                              flow: "vault",
+                            },
+                          }}
+                          onInstance={(instance) => setInstance(instance)}
+                          onError={(error) =>
+                            console.error("Drop-In error:", error)
+                          }
+                        />
+                      </>
+                    )}
+
+                    <button
+                      className="btn btn-warning rounded-5"
+                      style={{ width: "80%" }}
+                      onClick={handlePayment}
+                      disabled={loading || !instance || !auth?.user?.address}
+                    >
+                      {loading ? "Processing..." : "Make Payment"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

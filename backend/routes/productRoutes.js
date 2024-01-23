@@ -11,7 +11,9 @@ import {
   productListByPageController,
   searchProductController,
   similarProductController,
-  categoryProductController
+  categoryProductController,
+  braintreeTokenController,
+  braintreePaymentController,
 } from "../controllers/productController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
@@ -72,6 +74,12 @@ router.get("/similar-products/:pid/:cid", similarProductController);
 
 //~  SIMILAR PRODUCTS
 router.get("/category-products/:slug", categoryProductController);
+
+//?P PAYMENT ROUTES
+//token
+router.get("/braintree/token", braintreeTokenController);
+//Payments
+router.post("/braintree/payment", requireSignIn, braintreePaymentController);
 
 // //~ SUGGESTIONS FOR SEARCH BAR
 // router.get("/suggestions/:keyword", searchProductSuggestionsController);
