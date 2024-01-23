@@ -1,6 +1,7 @@
 import userModel from "../models/userModel.js";
 import { comparePasswords, hashPassword } from "../helpers/authHelper.js";
 import JWT from "jsonwebtoken";
+import orderModel from "../models/orderModel.js";
 
 //* REGISTER CONTROLLER || POST
 export const registerController = async (req, res) => {
@@ -233,6 +234,24 @@ export const updateAddressController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error in Updating Address",
+      err,
+    });
+  }
+};
+
+//* GET ALL ORDERS || GET
+export const getAllOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyer: req.user._id })
+      .populate("products", "-image")
+      .populate("buyer", "name");
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      msg: "Error While Fetching Orders",
       err,
     });
   }

@@ -75,7 +75,7 @@ router.get("/similar-products/:pid/:cid", similarProductController);
 //~  SIMILAR PRODUCTS
 router.get("/category-products/:slug", categoryProductController);
 
-//?P PAYMENT ROUTES
+//! PAYMENT ROUTES
 //token
 router.get("/braintree/token", braintreeTokenController);
 //Payments

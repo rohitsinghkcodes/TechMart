@@ -268,16 +268,28 @@ CONTACT PAGE CSS
   color: #3cd20088;
 }
 
-
 /* Category Section Tiles */
-.category-tiles{
+.category-tiles {
   color: white;
   background-color: #0000005b;
   align-items: center;
   border: none;
   text-decoration: none;
 }
-.category-tiles:hover{
-  background-color: #19191967;
+.category-tiles:hover {
+  background-color: #ffffffb9;
 }
 
+/* TABLE CSS */
+
+.table-dark {
+  text-align: center;
+  border-radius: 20px; /* Rounded corners for the table */
+  overflow: hidden; /* Ensure rounded corners are visible */
+}
+
+/* TABLE ITEMS */
+.table-items {
+  color: #ffffffb9;
+  border: none;
+}
