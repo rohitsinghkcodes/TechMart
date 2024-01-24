@@ -4,9 +4,13 @@ import { useAuth } from "../../Context/authContext.js";
 import SearchComponent from "../Form/SearchComponent.js";
 import useCategory from "../../hooks/useCategory.js";
 import { useCart } from "../../Context/cartContext.js";
-import {  Badge, Space } from "antd";
+import { Badge, Space } from "antd";
 import { BsCart3 } from "react-icons/bs";
-// import toast from "react-hot-toast";
+import { PiSignOutDuotone } from "react-icons/pi";
+import { MdSpaceDashboard } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
+import { FaBoxOpen, FaRegUserCircle } from "react-icons/fa";
+import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { toast } from "react-toastify";
 
 const Header = () => {
@@ -73,7 +77,11 @@ const Header = () => {
 
                 <ul className="dropdown-menu dropdown-menu-lg-end">
                   <li>
-                    <Link to={`/categories`} className="dropdown-item" style={{color:"wheat"}}>
+                    <Link
+                      to={`/categories`}
+                      className="dropdown-item"
+                      style={{ color: "wheat" }}
+                    >
                       All Categories
                     </Link>
                   </li>
@@ -103,9 +111,8 @@ const Header = () => {
               ) : (
                 <>
                   <li className="nav-item dropdown mx-2">
-                    <NavLink
+                    <Link
                       className="nav-link dropdown-toggle"
-                      href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -113,34 +120,59 @@ const Header = () => {
                       {/* Making fisrt letter of name capital */}
                       {auth.user.name[0].toUpperCase() +
                         auth.user.name.slice(1)}
-                    </NavLink>
-                    {/* Dropdown menu */}
-                    <ul className="dropdown-menu dropdown-menu-lg-end">
-                      <li>
-                        <NavLink
-                          to={`/dashboard/${
-                            auth?.user?.role === 1 ? "admin" : "user"
-                          }`}
-                          className="dropdown-item"
-                        >
-                          Dashboard
-                        </NavLink>
+                    </Link>
+                    {/* Dropdown menu*/}
+                    {auth?.user?.role === 0 ? (
+                      // if user is non admin
+                      <ul className="dropdown-menu dropdown-menu-lg-end">
+                        <li>
+                          <Link to="/profile" className="dropdown-item">
+                            <FaRegUserCircle /> &nbsp; My Profile
+                          </Link>
 
-                        <NavLink
-                          to="/login"
-                          onClick={handleLogOut}
-                          className="dropdown-item"
-                        >
-                          Sign Out
-                        </NavLink>
-                      </li>
-                    </ul>
+                          <Link to="/orders" className="dropdown-item ">
+                            <FaBoxOpen /> &nbsp; My Orders
+                          </Link>
+                          <Link to="/contact" className="dropdown-item ">
+                            <TfiHeadphoneAlt /> &nbsp; 24x7 Helpline
+                          </Link>
+                          <Link
+                            to="/login"
+                            onClick={handleLogOut}
+                            className="dropdown-item"
+                          >
+                            <IoLogOut /> &nbsp; Sign Out
+                          </Link>
+                        </li>
+                      </ul>
+                    ) : (
+                      // if user is admin
+                      <ul className="dropdown-menu dropdown-menu-lg-end">
+                        <li>
+                          <Link
+                            to={`/dashboard/${
+                              auth?.user?.role === 1 ? "admin" : "user"
+                            }`}
+                            className="dropdown-item"
+                          >
+                            <MdSpaceDashboard /> &nbsp; Dashboard
+                          </Link>
+                          <Link
+                            to="/login"
+                            onClick={handleLogOut}
+                            className="dropdown-item"
+                          >
+                            <IoLogOut /> &nbsp; Sign Out
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                 </>
               )}
 
               <li className="nav-item mx-2">
-                <NavLink to="/cart" className="nav-link " href="#">
+                <NavLink to="/cart" className="nav-link ">
                   <Space size="small">
                     <Badge count={cart?.length} color="#a71344" showZero>
                       <BsCart3 color="white" size="25px" />

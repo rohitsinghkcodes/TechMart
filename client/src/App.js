@@ -6,7 +6,6 @@ import Policy from "./Pages/Policy.js";
 import PagenotFound from "./Pages/PagenotFound.js";
 import Register from "./Pages/Auth/Register.js";
 import Login from "./Pages/Auth/Login.js";
-import DashBoard from "./Pages/User/DashBoard.js";
 import PrivateRoute from "./Components/Routes/PrivateRoutes.js";
 import ForgotPassword from "./Pages/Auth/ForgotPassword.js";
 import AdminRoute from "./Components/Routes/AdminRoutes.js";
@@ -39,10 +38,9 @@ function App() {
         <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         {/* USER ROUTES */}
-        <Route path="/dashboard" element={<PrivateRoute />}>
-          <Route path="user" element={<DashBoard />} />
-          <Route path="user/profile" element={<Profile />} />
-          <Route path="user/orders" element={<Orders />} />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
         {/* ADMIN ROUTES */}
         <Route path="/dashboard" element={<AdminRoute />}>
