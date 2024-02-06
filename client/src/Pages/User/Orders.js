@@ -27,13 +27,12 @@ const Orders = () => {
     <Layout title={"Dashboard - My Orders"}>
       <div className="container container-fluid p-3">
         <div>
-          <h1 className="mb-5">My Orders</h1>
-
-          <div className="">
+          <h1>My Orders</h1>
+          <div>
             {orders?.map((o, i) => {
               return (
                 <div className="row">
-                  <div className=" row bg-dark border border-bottom-0 border-secondary text-white rounded-top-5 m-0 mt-4 py-4 ">
+                  <div className=" row bg-dark border border-bottom-0 border-secondary text-white rounded-top-5 m-0 mt-4 pt-4 ">
                     <div className="col">
                       <p3 className="row d-flex justify-content-center order-head">
                         STATUS
@@ -58,23 +57,38 @@ const Orders = () => {
                         {o.buyer?.name}
                       </p3>
                     </div>
-                    <div className="col-7">
+                    <div className="col ">
+                      <p3 className="row d-flex justify-content-center order-head">
+                        PAYMENT
+                      </p3>
+                      <p3
+                        className={`row d-flex justify-content-center ${
+                          o.payment.success ? "text-success" : "text-danger"
+                        }`}
+                      >
+                        {o.payment.success ? "Successful" : "Pending"}
+                      </p3>
+                    </div>
+                    <div className="col-6">
                       <p3 className="row d-flex justify-content-center order-head">
                         ORDER # {o._id}
                       </p3>
                       <p3 className=" order-head d-flex justify-content-center">
-                        TOTAL :&ensp;<p className="text-light">₹ {o.payment.transaction.amount}</p>
+                        TOTAL :&ensp;
+                        <p className="text-light">
+                          ₹ {o.payment.transaction.amount}
+                        </p>
                       </p3>
                     </div>
                     <hr className="mt-2" />
                   </div>
-                  <div className=" text-light rounded-bottom-5 bg-none  border border-secondary border-top-0 bg-dark">
+                  <div className=" text-light rounded-bottom-5 bg-none  border border-secondary border-top-0 bg-dark pt-3">
                     {o.products.map((product) => (
                       <div
-                        className=" row m-2  rounded-top-5  text-light flex-row "
+                        className=" row m-2 mt-0 rounded-top-5  text-light flex-row "
                         key={product._id}
                       >
-                        <div className="col-md-1 py-2 d-flex justify-content-end">
+                        <div className="col-md-1 pb-4 d-flex justify-content-end">
                           <img
                             src={`/api/v1/products/product-image/${product?._id}`}
                             className="rounded-3 img-fluid text-start"
@@ -82,7 +96,7 @@ const Orders = () => {
                           />
                         </div>
                         <div className="col-md-5">
-                          <div className="text-start ">
+                          <div className="text-start mt-1">
                             <p className="card-title">{product.name}</p>
                             <h6
                               className="card-title"
@@ -133,10 +147,8 @@ const Orders = () => {
                             </h6>
                           </div>
                         </div>
-                        
                       </div>
                     ))}
-                    
                   </div>
                 </div>
               );
