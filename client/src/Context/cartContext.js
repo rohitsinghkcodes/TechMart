@@ -3,9 +3,8 @@ import axios from "axios";
 
 const CartContext = createContext();
 
-//using the SearchProvider we can use the auth from anywhere throughout the app
 const CartProvider = ({ children }) => {
-  //initial auth data
+  
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
