@@ -72,7 +72,7 @@ router.get("/search/:keyword", searchProductController);
 //~  SIMILAR PRODUCTS
 router.get("/similar-products/:pid/:cid", similarProductController);
 
-//~  SIMILAR PRODUCTS
+//~  category PRODUCTS
 router.get("/category-products/:slug", categoryProductController);
 
 //! PAYMENT ROUTES
@@ -81,8 +81,6 @@ router.get("/braintree/token", braintreeTokenController);
 //Payments
 router.post("/braintree/payment", requireSignIn, braintreePaymentController);
 
-// //~ SUGGESTIONS FOR SEARCH BAR
-// router.get("/suggestions/:keyword", searchProductSuggestionsController);
 
 //exporting the routers
 export default router;

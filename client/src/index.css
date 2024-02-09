@@ -216,7 +216,7 @@ CONTACT PAGE CSS
 .product-card {
   box-shadow: none;
   border: none;
-  /* border-radius: 20px; */
+  border-radius: 20px;
   color: #ffffffda;
 }
 

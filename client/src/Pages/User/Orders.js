@@ -28,7 +28,8 @@ const Orders = () => {
       <div className="container container-fluid p-3">
         <div>
           <h1>My Orders</h1>
-          <div>
+          <div
+          >
             {orders?.map((o, i) => {
               return (
                 <div className="row">
